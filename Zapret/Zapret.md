@@ -4,6 +4,21 @@ tags:
 aliases:
 ---
 
+```base
+views:
+  - type: table
+    name: Table
+    filters:
+      and:
+        - file.inFolder("Zapret/ToDo")
+    order:
+      - file.name
+      - tags
+    columnSize:
+      file.name: 488
+
+```
+
 ## [[Privacy]]
 
 [[Базовые аргументы (режимы фильтрации WinDivert)]]
