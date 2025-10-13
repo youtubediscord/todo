@@ -1,6 +1,7 @@
 ---
 tags:
   - zapret
+aliases:
 ---
 
 ## [[Privacy]]
