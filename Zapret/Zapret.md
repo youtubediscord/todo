@@ -25,8 +25,7 @@ views:
 [[ZapretTeam]]
 [[Ошибка запуска - Не удалось запустить DPI]]
 [[Как скачать Zapret GUI]]
-[[Zapret VPN - что это такое и все тарифы]]
-[[Zapret VPN (VLESS)]]
+[[Всё о Zapret Premium и Zapret VPN (подробная инструкция)]]
 [[Как пользоваться Zapret]]
 [[Манифест Zapret]]
 
