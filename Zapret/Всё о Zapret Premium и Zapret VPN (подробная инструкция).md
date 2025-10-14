@@ -193,7 +193,11 @@ domain:discord.com
 
 <h1 style="font-size: 40px;">Android</h1>
 
-Получение ключа в боте аналогичное. Клиент скачивается по [ссылке](https://github.com/2dust/v2rayNG/releases/latest/download/v2rayNG_1.10.19_arm64-v8a.apk)
+Получение ключа в боте аналогичное. Клиент скачивается по [ссылке](https://github.com/2dust/v2rayNG/releases)
+
+Номер версии может отличаться, но в 99% случаев для современных смартфонов архитектура вашего телефона уже является `arm64`, поэтому следует выбрить этот файл:
+
+![[Pasted image 20251014145618.png]]
 
 <h1 style="font-size: 40px;">IOS</h1>
 
