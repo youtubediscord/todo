@@ -2,6 +2,13 @@
 ![[Как пользоваться Zapret#Словарь терминов (глоссарий)]]
 
 ## Zapret
+### [Однокнопочный zapret для Linux](https://github.com/ImMALWARE/zapret-linux-easy)
+1. Скачайте и распакуйте [архив](https://github.com/ImMALWARE/zapret-linux-easy/archive/refs/heads/main.zip) (либо по команде `git clone https://github.com/ImMALWARE/zapret-linux-easy && cd zapret-linux-easy`)
+2. Убедитесь, что у вас установлены пакеты curl, iptables и ipset (для FWTYPE=iptables) или curl и nftables (для FWTYPE=nftables)!
+	1. Если нет — установите. Если вы не знаете как, спросите у ChatGPT!
+3. Откройте терминал в папке, куда архив был распакован
+4. Выполните `./install.sh`
+
 
 
 ## Zapret GUI
