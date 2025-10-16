@@ -11,3 +11,4 @@ url: "https://github.com/Flowseal/zapret-discord-youtube/discussions"
 favicon: ""
 aspectRatio: "50"
 ```
+

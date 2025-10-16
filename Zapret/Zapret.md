@@ -27,6 +27,7 @@ views:
 [[Как скачать Zapret]]
 [[Всё о Zapret Premium и Zapret VPN (подробная инструкция)]]
 [[Как пользоваться Zapret]]
+[[ByeByeDPI - Что это такое]]
 [[Манифест Zapret]]
 
 [[Zapret VPN (Telegram bot)]]
