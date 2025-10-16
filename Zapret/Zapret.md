@@ -32,19 +32,8 @@ views:
 
 [[Zapret VPN (Telegram bot)]]
 
-### [[Дорожная карта]]
-[[Zapret ссылки]]
+### [[Дорожная карта]] | [[Zapret ссылки]]
 
-## YTDisBystro
-[[YTDisBystro_v3.5]]
-
-## [[Dronatar]]
-## [[Youtube + Discord]]
-
-[[ipset-ovh.txt]]
-
-[[LordSlon]]
-[[telegram calls]]
 
 ```embed
 title: "Add batch files to manage ipsets by ekungurov · Pull Request #3448 · Flowseal/zapret-discord-youtube"
