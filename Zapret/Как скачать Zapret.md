@@ -1,4 +1,10 @@
 
+![[Как пользоваться Zapret#Словарь терминов (глоссарий)]]
+
+## Zapret
+
+
+## Zapret GUI
 > [!danger] ВАЖНО!
 > Zapret GUI доступен только для Windows 10 1809+ и выше. Для Windows 7, Windows 8 и Windows 10 1803 (и ниже) пройдите по ссылке: https://t.me/bypassblock/666
  
