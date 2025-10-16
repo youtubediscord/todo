@@ -32,6 +32,7 @@ views:
 [[Zapret VPN (Telegram bot)]]
 
 ### [[Дорожная карта]]
+[[Zapret ссылки]]
 
 ## YTDisBystro
 [[YTDisBystro_v3.5]]
