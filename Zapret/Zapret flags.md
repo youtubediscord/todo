@@ -374,3 +374,333 @@
 ### TCP флаги (12 бит):
 - Стандартные: FIN, SYN, RST, PSH, ACK, URG, ECE, CWR
 - Reserved: **AE** (Accurate ECN), **R1, R2, R3**
+
+# 🔀 Разделение параметров nfqws по типам трафика
+
+## 🔐 HTTPS (TLS over TCP, порт 443)
+
+### Основные режимы десинхронизации
+```bash
+--dpi-desync=fake,split              # Фейковый TLS ClientHello + сегментация
+--dpi-desync=fakedsplit              # Замешивание фейков и оригинала
+--dpi-desync=multisplit              # Нарезка на несколько сегментов
+--dpi-desync=multidisorder           # Нарезка + обратный порядок
+--dpi-desync=hostfakesplit           # Фейк только на имени хоста (SNI)
+```
+
+### Позиции разреза (специфичные для TLS)
+```bash
+--dpi-desync-split-pos=sni           # Разрез в начале SNI extension
+--dpi-desync-split-pos=sniext        # Разрез в начале данных SNI
+--dpi-desync-split-pos=host          # Разрез в начале hostname в SNI
+--dpi-desync-split-pos=midsld        # Разрез в середине домена 2-го уровня
+--dpi-desync-split-pos=sld           # Разрез в начале SLD
+```
+
+### Фейковые пейлоады для TLS
+```bash
+--dpi-desync-fake-tls=@tls_clienthello.bin       # Кастомный TLS ClientHello
+--dpi-desync-fake-tls=!                          # Стандартный фейк
+--dpi-desync-fake-tls=0xHEX                      # Hex-данные
+
+# Модификации TLS фейков
+--dpi-desync-fake-tls-mod=rnd                    # Рандомизировать random и session_id
+--dpi-desync-fake-tls-mod=rndsni                 # Случайный SNI
+--dpi-desync-fake-tls-mod=dupsid                 # Копировать session_id из оригинала
+--dpi-desync-fake-tls-mod=sni=google.com         # Заменить SNI
+--dpi-desync-fake-tls-mod=padencap               # Инкапсулировать в padding extension
+--dpi-desync-fake-tls-mod=rnd,dupsid,rndsni      # Комбинация (по умолч.)
+```
+
+### Фильтры для HTTPS
+```bash
+--filter-tcp=443                                  # Только порт 443
+--filter-l7=tls                                   # Только TLS протокол
+--dpi-desync-skip-nosni=1                         # Пропускать ESNI (по умолч.)
+```
+
+### Типичные конфигурации для HTTPS
+```bash
+# Вариант 1: Простой split на SNI
+--filter-tcp=443 --dpi-desync=split --dpi-desync-split-pos=sniext
+
+# Вариант 2: Фейк + split с TTL
+--filter-tcp=443 --dpi-desync=fake,split \
+--dpi-desync-fooling=badsum --dpi-desync-split-pos=midsld
+
+# Вариант 3: AutoTTL фейк
+--filter-tcp=443 --dpi-desync=fake,multisplit \
+--dpi-desync-autottl=2 --dpi-desync-split-pos=sniext,midsld
+
+# Вариант 4: Disorder с кастомным SNI
+--filter-tcp=443 --dpi-desync=fake,multidisorder \
+--dpi-desync-fake-tls-mod=sni=ya.ru --dpi-desync-split-pos=midsld
+```
+
+---
+
+## 🌐 HTTP (plain HTTP over TCP, порт 80)
+
+### Основные режимы
+```bash
+--dpi-desync=split                    # Простая сегментация
+--dpi-desync=multisplit               # Множественная нарезка
+--dpi-desync=fake,split               # Фейк + сегментация
+--dpi-desync=hostfakesplit            # Фейк на Host: заголовке
+```
+
+### Позиции разреза (специфичные для HTTP)
+```bash
+--dpi-desync-split-pos=method         # В начале метода (GET, POST)
+--dpi-desync-split-pos=method+2       # После "GET" -> "GE|T /"
+--dpi-desync-split-pos=host           # В начале значения Host:
+--dpi-desync-split-pos=midsld         # В середине домена
+--dpi-desync-split-pos=3              # После 3-го байта: "GET| /"
+```
+
+### Модификация HTTP заголовков
+```bash
+--hostcase                            # "Host:" → "host:"
+--hostspell=HoSt                      # Точное написание
+--hostnospace                         # Убрать пробел после Host:
+--domcase                             # example.com → ExAmPlE.cOm
+--methodeol                           # \n перед методом
+```
+
+### Фейковые пейлоады для HTTP
+```bash
+--dpi-desync-fake-http=@fake_request.txt         # Кастомный HTTP запрос
+--dpi-desync-fake-http=0x474554202F20485454...   # Hex-данные
+# По умолчанию: GET / HTTP/1.1\r\nHost: www.iana.org\r\n\r\n
+```
+
+### Фильтры для HTTP
+```bash
+--filter-tcp=80                       # Только порт 80
+--filter-l7=http                      # Только HTTP протокол
+```
+
+### Типичные конфигурации для HTTP
+```bash
+# Вариант 1: Split после метода
+--filter-tcp=80 --dpi-desync=split --dpi-desync-split-pos=method+2
+
+# Вариант 2: Смена регистра + split
+--filter-tcp=80 --hostcase --dpi-desync=split --dpi-desync-split-pos=host
+
+# Вариант 3: Фейк с TTL
+--filter-tcp=80 --dpi-desync=fake,split \
+--dpi-desync-ttl=4 --dpi-desync-split-pos=midsld
+
+# Вариант 4: Модификация заголовков
+--filter-tcp=80 --hostcase --domcase --methodeol
+```
+
+---
+
+## 🔌 TCP (прочий TCP трафик)
+
+### Когда применяется
+```bash
+--dpi-desync-any-protocol=1           # Работать со ВСЕМИ TCP пакетами
+```
+
+⚠️ **Внимание:** Без этого флага desync работает только с HTTP/TLS!
+
+### Подходящие режимы для любого TCP
+```bash
+--dpi-desync=syndata                  # Данные в SYN пакете
+--dpi-desync=synack                   # Модификация handshake
+--dpi-desync=multisplit               # Универсальная сегментация
+--dpi-desync=fake,split               # Фейк + split
+```
+
+### Позиции разреза (универсальные)
+```bash
+--dpi-desync-split-pos=1              # После 1-го байта
+--dpi-desync-split-pos=2              # После 2-го байта
+--dpi-desync-split-pos=-1             # Последний байт
+--dpi-desync-split-pos=10,20,30       # Множественные позиции
+```
+
+### Фейковые пейлоады для неизвестных протоколов
+```bash
+--dpi-desync-fake-unknown=@payload.bin           # Кастомный пейлоад
+--dpi-desync-fake-unknown=0x0000...              # Hex (256 байт по умолч.)
+```
+
+### Sequence overlap (для любого TCP)
+```bash
+--dpi-desync-split-seqovl=10                     # Перекрытие на 10 байт
+--dpi-desync-split-seqovl-pattern=0x41414141     # Чем заполнять overlap
+```
+
+### Фильтры для прочего TCP
+```bash
+--filter-tcp=*                        # Все TCP порты
+--filter-tcp=~80,443                  # Все КРОМЕ 80 и 443
+--filter-tcp=22,3389                  # Конкретные порты (SSH, RDP)
+--filter-l7=unknown                   # Неизвестные протоколы
+```
+
+### Типичные конфигурации для TCP
+```bash
+# Вариант 1: SSH, VPN через TCP
+--filter-tcp=22 --dpi-desync=split --dpi-desync-split-pos=2 \
+--dpi-desync-any-protocol=1
+
+# Вариант 2: Все TCP кроме HTTP/HTTPS
+--filter-tcp=~80,443 --dpi-desync=fake,split \
+--dpi-desync-any-protocol=1 --dpi-desync-split-pos=1
+
+# Вариант 3: SYN data для быстрых соединений
+--filter-tcp=* --dpi-desync=syndata \
+--dpi-desync-fake-syndata=@payload.bin
+```
+
+---
+
+## 📡 UDP
+
+### Режимы десинхронизации для UDP
+```bash
+--dpi-desync=udplen                   # Увеличить длину UDP пакета
+--dpi-desync=tamper                   # Испортить пакет
+--dpi-desync=fake                     # Фейковый UDP пакет
+--dpi-desync=ipfrag2                  # IP фрагментация
+```
+
+### UDP длина (udplen)
+```bash
+--dpi-desync-udplen-increment=2       # Увеличить длину на 2 байта
+--dpi-desync-udplen-pattern=0x0000    # Чем добивать (по умолч. нули)
+```
+
+### Фейковые пейлоады для UDP протоколов
+```bash
+# QUIC (HTTP/3)
+--dpi-desync-fake-quic=@quic_initial.bin
+--filter-l7=quic
+--filter-udp=443
+
+# WireGuard VPN
+--dpi-desync-fake-wireguard=@wg_handshake.bin
+--filter-l7=wireguard
+--filter-udp=51820
+
+# DHT (torrents)
+--dpi-desync-fake-dht=@dht_payload.bin
+--filter-l7=dht
+
+# Discord голосовой чат
+--dpi-desync-fake-discord=@discord_payload.bin
+--filter-l7=discord
+
+# STUN (WebRTC, VoIP)
+--dpi-desync-fake-stun=@stun_payload.bin
+--filter-l7=stun
+
+# Неизвестный UDP
+--dpi-desync-fake-unknown-udp=@payload.bin
+--filter-l7=unknown
+```
+
+### Фильтры для UDP
+```bash
+--filter-udp=443                      # QUIC (HTTP/3)
+--filter-udp=53                       # DNS
+--filter-udp=51820                    # WireGuard
+--filter-udp=*                        # Все UDP
+--filter-l7=quic,wireguard,stun       # Несколько протоколов
+```
+
+### Типичные конфигурации для UDP
+```bash
+# Вариант 1: QUIC (YouTube, Google)
+--filter-udp=443 --filter-l7=quic \
+--dpi-desync=fake --dpi-desync-repeats=6 \
+--dpi-desync-fake-quic=@quic_initial.bin
+
+# Вариант 2: WireGuard VPN
+--filter-udp=51820 --filter-l7=wireguard \
+--dpi-desync=fake,udplen \
+--dpi-desync-udplen-increment=2
+
+# Вариант 3: Все UDP с увеличением длины
+--filter-udp=* --dpi-desync=udplen \
+--dpi-desync-udplen-increment=1
+
+# Вариант 4: DNS через UDP
+--filter-udp=53 --dpi-desync=fake \
+--dpi-desync-ttl=1
+```
+
+---
+
+## 📊 Сравнительная таблица
+
+| Параметр | HTTPS | HTTP | TCP | UDP |
+|----------|-------|------|-----|-----|
+| **Основной порт** | 443 | 80 | * | * |
+| **Фильтр L7** | `tls` | `http` | `unknown` | `quic`, `wireguard`, etc. |
+| **Лучший режим** | `fake,split` | `split` | `syndata` | `fake,udplen` |
+| **Маркеры split** | `sniext`, `midsld` | `method+2`, `host` | Числа | - |
+| **Фейки** | `--fake-tls` | `--fake-http` | `--fake-unknown` | `--fake-quic`, etc. |
+| **Модификации** | `--fake-tls-mod` | `--hostcase` | - | `--udplen-increment` |
+| **any-protocol** | Не нужен | Не нужен | **Обязателен!** | - |
+
+---
+
+## 🎯 Готовые профили (многопрофильная конфигурация)
+
+### Полная конфигурация для всех типов трафика
+```bash
+# Профиль 1: HTTPS
+--filter-tcp=443 --filter-l7=tls \
+--dpi-desync=fake,multisplit \
+--dpi-desync-split-pos=sniext,midsld \
+--dpi-desync-fooling=badsum \
+--dpi-desync-fake-tls-mod=rnd,dupsid
+
+# Профиль 2: HTTP
+--new \
+--filter-tcp=80 --filter-l7=http \
+--hostcase --domcase \
+--dpi-desync=split \
+--dpi-desync-split-pos=method+2
+
+# Профиль 3: QUIC (YouTube)
+--new \
+--filter-udp=443 --filter-l7=quic \
+--dpi-desync=fake \
+--dpi-desync-repeats=6
+
+# Профиль 4: Прочий TCP
+--new \
+--filter-tcp=~80,443 \
+--dpi-desync=split \
+--dpi-desync-split-pos=2 \
+--dpi-desync-any-protocol=1
+
+# Профиль 5: WireGuard
+--new \
+--filter-udp=51820 --filter-l7=wireguard \
+--dpi-desync=fake,udplen \
+--dpi-desync-udplen-increment=2
+```
+
+---
+
+## 💡 Ключевые отличия
+
+### HTTPS vs HTTP
+- **HTTPS**: Работает с бинарным TLS, нужны `sni*` маркеры, `--fake-tls-mod`
+- **HTTP**: Работает с текстом, можно менять регистр (`--hostcase`), маркеры `method`, `host`
+
+### TCP vs UDP  
+- **TCP**: Sequence numbers, сегментация, syn/ack манипуляции
+- **UDP**: Без состояния, `udplen`, специфичные фейки для протоколов
+
+### Известные vs неизвестные протоколы
+- **HTTP/TLS**: Автоопределение, маркеры работают
+- **Прочие**: Нужен `--dpi-desync-any-protocol=1`, только числовые позиции split
