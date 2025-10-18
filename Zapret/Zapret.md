@@ -23,6 +23,7 @@ views:
 
 [[Базовые аргументы (режимы фильтрации WinDivert)]]
 [[ZapretTeam]]
+[[Zapret flags]]
 [[Ошибка запуска - Не удалось запустить DPI]]
 [[Как скачать Zapret]]
 [[Всё о Zapret Premium и Zapret VPN (подробная инструкция)]]
