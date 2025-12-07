@@ -31,7 +31,7 @@ views:
 [[ByeByeDPI - Что это такое]]
 [[Манифест Zapret]]
 
-[[Zapret2]]
+## [[Zapret2]]
 
 [[Zapret VPN (Telegram bot)]]
 
