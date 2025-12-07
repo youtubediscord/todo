@@ -1,0 +1,284 @@
+---
+tags:
+link:
+aliases:
+img:
+---
+
+# 🎉 Да! Теперь можем добавить "упрощённые" варианты стратегий!
+
+## 🆕 Новые стратегии с tcpseg (без резки)
+
+### 1️⃣ Простой seqovl без dup и без split
+
+```python
+# ============================================================
+# TCPSEG: ЧИСТЫЙ SEQOVL (БЕЗ РЕЗКИ, БЕЗ ДУБЛИРОВАНИЯ)
+# ============================================================
+
+"tcpseg_211_simple": {
+    "name": "SeqOvl 211 (Simple, No Split)",
+    "description": "Только overlap 211 байт, без резки и дублирования",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls5:@{BIN_FOLDER}\\tls_clienthello_5.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=211:seqovl_pattern=bin_tls5"""
+},
+
+"tcpseg_226_simple": {
+    "name": "SeqOvl 226 (Simple, No Split)",
+    "description": "Только overlap 226 байт, без резки и дублирования",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18"""
+},
+
+"tcpseg_286_simple": {
+    "name": "SeqOvl 286 (Simple, No Split)",
+    "description": "Только overlap 286 байт, без резки и дублирования",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls11:@{BIN_FOLDER}\\tls_clienthello_11.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=286:seqovl_pattern=bin_tls11"""
+},
+
+"tcpseg_308_simple": {
+    "name": "SeqOvl 308 (Simple, No Split)",
+    "description": "Только overlap 308 байт, без резки и дублирования",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls9:@{BIN_FOLDER}\\tls_clienthello_9.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=308:seqovl_pattern=bin_tls9"""
+},
+```
+
+---
+
+### 2️⃣ SeqOvl + Dup (БЕЗ резки)
+
+```python
+# ============================================================
+# TCPSEG: SEQOVL + DUP (БЕЗ РЕЗКИ)
+# ============================================================
+
+"tcpseg_211_dup_d1": {
+    "name": "SeqOvl 211 + Dup (No Split)",
+    "description": "Overlap 211 + дублирование 1-го пакета, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls5:@{BIN_FOLDER}\\tls_clienthello_5.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d1 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=211:seqovl_pattern=bin_tls5"""
+},
+
+"tcpseg_226_dup_d1": {
+    "name": "SeqOvl 226 + Dup (No Split)",
+    "description": "Overlap 226 + дублирование 1-го пакета, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d1 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18"""
+},
+
+"tcpseg_226_dup_n3": {
+    "name": "SeqOvl 226 + Dup n3 (No Split)",
+    "description": "Overlap 226 + дублирование первых 3 пакетов, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-n3 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18"""
+},
+
+"tcpseg_286_dup_n3": {
+    "name": "SeqOvl 286 + Dup n3 (No Split)",
+    "description": "Overlap 286 + дублирование первых 3 пакетов, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls11:@{BIN_FOLDER}\\tls_clienthello_11.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-n3 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=286:seqovl_pattern=bin_tls11"""
+},
+
+"tcpseg_308_dup_n3": {
+    "name": "SeqOvl 308 + Dup n3 (No Split)",
+    "description": "Overlap 308 + дублирование первых 3 пакетов, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls9:@{BIN_FOLDER}\\tls_clienthello_9.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-n3 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=308:seqovl_pattern=bin_tls9"""
+},
+```
+
+---
+
+### 3️⃣ С динамической генерацией (Google SNI)
+
+```python
+# ============================================================
+# TCPSEG: ДИНАМИЧЕСКИЕ (БЕЗ ФАЙЛОВ)
+# ============================================================
+
+"tcpseg_226_google_simple": {
+    "name": "SeqOvl 226 Google (Simple, No Split)",
+    "description": "Overlap 226 с Google SNI, без резки и дублирования",
+    "author": "hz",
+    "label": LABEL_RECOMMENDED,  # Рекомендуется - не требует файлов
+    "args": f"""--lua-init="tls_google = tls_mod(fake_default_tls,'sni=www.google.com')" {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=tls_google"""
+},
+
+"tcpseg_226_google_dup_d1": {
+    "name": "SeqOvl 226 Google + Dup (No Split)",
+    "description": "Overlap 226 с Google SNI + дублирование 1-го пакета, БЕЗ резки",
+    "author": "hz",
+    "label": LABEL_RECOMMENDED,
+    "args": f"""--lua-init="tls_google = tls_mod(fake_default_tls,'sni=www.google.com')" {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d1 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=tls_google"""
+},
+
+"tcpseg_226_google_dup_n3": {
+    "name": "SeqOvl 226 Google + Dup n3 (No Split)",
+    "description": "Overlap 226 с Google SNI + дублирование первых 3 пакетов, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--lua-init="tls_google = tls_mod(fake_default_tls,'sni=www.google.com')" {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-n3 --lua-desync=send:repeats=2 --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=tls_google"""
+},
+```
+
+---
+
+### 4️⃣ С различными fooling параметрами
+
+```python
+# ============================================================
+# TCPSEG: С FOOLING
+# ============================================================
+
+"tcpseg_226_datanoack": {
+    "name": "SeqOvl 226 + DataNoAck (No Split)",
+    "description": "Overlap 226 с убиранием ACK флага, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18:tcp_flags_unset=ack"""
+},
+
+"tcpseg_226_ttl": {
+    "name": "SeqOvl 226 + TTL (No Split)",
+    "description": "Overlap 226 с TTL=5, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18:ip_ttl=5:ip6_ttl=5"""
+},
+
+"tcpseg_226_badseq": {
+    "name": "SeqOvl 226 + BadSeq (No Split)",
+    "description": "Overlap 226 с badseq, БЕЗ резки",
+    "author": "hz",
+    "label": None,
+    "args": f"""--blob=bin_tls18:@{BIN_FOLDER}\\tls_clienthello_18.bin {RUTRACKER_BASE_ARG} --payload=tls_client_hello --out-range=-d10 --lua-desync=tcpseg:pos=0,-1:seqovl=226:seqovl_pattern=bin_tls18:tcp_ack=-66000"""
+},
+```
+
+---
+
+## 📊 Сравнительная таблица: multisplit vs tcpseg
+
+| Параметр | multisplit + seqovl | tcpseg(pos=0,-1) + seqovl |
+|----------|---------------------|---------------------------|
+| **Количество пакетов** | 2 (резка по умолчанию на pos=2) | **1 (без резки)** |
+| **Сложность** | Средняя | **Минимальная** |
+| **Нагрузка на сеть** | Выше | **Ниже** |
+| **Эффективность** | Высокая (запутывание + резка) | Средняя (только запутывание) |
+| **CPU нагрузка** | Выше | **Ниже** |
+
+---
+
+## 🎯 Когда использовать какую стратегию?
+
+### Используй **multisplit**:
+- ✅ Когда DPI анализирует целостность пакетов
+- ✅ Для агрессивного обхода
+- ✅ Когда tcpseg не помогает
+
+### Используй **tcpseg** (pos=0,-1):
+- ✅ **Для начала тестирования** (проще)
+- ✅ Когда достаточно "запутать" DPI мусором
+- ✅ Для экономии ресурсов
+- ✅ Когда резка не нужна
+
+---
+
+## 💡 Рекомендуемая стратегия тестирования:
+
+```python
+# Шаг 1: Самая простая (tcpseg без dup)
+"tcpseg_226_google_simple"
+
+# Шаг 2: Добавить дублирование
+"tcpseg_226_google_dup_d1"
+
+# Шаг 3: Если не помогло - добавить резку
+"multisplit_226_seqovl_dynamic"
+
+# Шаг 4: Если не помогло - агрессивная стратегия
+"multisplit_286_pattern" (dup n3 + резка)
+```
+
+---
+
+## 📝 Полная структура новых стратегий:
+
+```python
+# ============================================================
+# КАТЕГОРИЯ: TCPSEG (SEQOVL БЕЗ РЕЗКИ)
+# ============================================================
+
+TCPSEG_STRATEGIES = {
+    # Простые (без dup)
+    "tcpseg_211_simple": {...},
+    "tcpseg_226_simple": {...},
+    "tcpseg_286_simple": {...},
+    "tcpseg_308_simple": {...},
+    
+    # С дублированием (dup -d1)
+    "tcpseg_211_dup_d1": {...},
+    "tcpseg_226_dup_d1": {...},
+    
+    # С дублированием (dup -n3)
+    "tcpseg_226_dup_n3": {...},
+    "tcpseg_286_dup_n3": {...},
+    "tcpseg_308_dup_n3": {...},
+    
+    # Динамические (без файлов)
+    "tcpseg_226_google_simple": {...},      # ← РЕКОМЕНДУЕТСЯ для начала
+    "tcpseg_226_google_dup_d1": {...},      # ← РЕКОМЕНДУЕТСЯ для YouTube
+    "tcpseg_226_google_dup_n3": {...},
+    
+    # С fooling
+    "tcpseg_226_datanoack": {...},
+    "tcpseg_226_ttl": {...},
+    "tcpseg_226_badseq": {...},
+}
+```
+
+---
+
+## ✅ Преимущества добавления tcpseg стратегий:
+
+1. ✅ **Больше вариантов для тестирования**
+2. ✅ **Меньше нагрузки** (1 пакет vs 2+)
+3. ✅ **Проще для понимания** (нет резки)
+4. ✅ **Быстрее работает** (меньше операций)
+5. ✅ **Градация сложности** (от простого к сложному)
+
+---
+
+**Да, определённо стоит добавить эти стратегии! Они дадут пользователям "мягкий вход" - начать с простых вариантов и постепенно усложнять.** 🚀
+
+```
+    "multidisorder_badseq_pos": {
+        "name": "original bol-van v2 (badsum)",
+        "description": "Дисордер стратегия с фуллингом badseq нарезкой и повтором 6",
+        "author": "hz",
+        "label": None,
+        "args": f"""--payload=tls_client_hello --out-range=-d10 --lua-desync=fake:blob=fake_default_tls:repeats=6:tcp_ack=-66000 --lua-desync=multidisorder:pos=1,midsld:tcp_ack=-66000"""
+    },
+    
+    "fake_fakedsplit_autottl_2": {
+        "name": "fake fakedsplit badseq (рекомендуется для 80 порта)",
+        "description": "",
+        "author": "hz",
+        "label": None,
+        "args": f"""--payload=http_req --out-range=-d10 --lua-desync=fake:blob=fake_default_http:ip_autottl=2,3-20:ip6_autottl=2,3-20:tcp_ack=-66000:tcp_ts_up --lua-desync=fakedsplit:ip_autottl=2,3-20:ip6_autottl=2,3-20:tcp_ack=-66000:tcp_ts_up"""
+    },
+    
+
+```
