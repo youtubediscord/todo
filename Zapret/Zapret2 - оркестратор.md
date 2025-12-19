@@ -1,0 +1,6 @@
+---
+tags:
+link:
+aliases:
+img:
+---
