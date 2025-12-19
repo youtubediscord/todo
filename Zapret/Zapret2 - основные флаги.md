@@ -3,6 +3,7 @@ tags:
 link:
 aliases:
 img:
+height: 1000
 ---
 
 ## Полный список обманок (fooling) в zapret2
