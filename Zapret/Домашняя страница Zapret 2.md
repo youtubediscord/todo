@@ -8,7 +8,7 @@ img:
 <h1 align="center"><img width="30" alt="image" src="https://github.com/user-attachments/assets/a9865f26-a61d-444f-8f6c-d186e5e21973" /><a href="https://github.com/bol-van/zapret2">Zapret 2</a> (Запрет: обход блокировки Дискорда и Ютуба) </h1>
 
 ### [[🛡 Что это такое]] | [[🚀 Как настроить под себя]] | [[❓ FAQ (часто задаваемые вопросы)]]
-### [⭐ Поддержать проект](premium.md) | [🐳 Win 7 и 8](version.md) | [⛔ Не работает!](https://github.com/youtubediscord/zapret/discussions/90) | [👾 О вирусах](https://teletype.in/@censorliber/zapretvirus)
+### [[Всё о Zapret Premium и Zapret VPN (подробная инструкция)|⭐ Поддержать проект]] | [🐳 Win 7 и 8](version.md) | [⛔ Не работает!](https://github.com/youtubediscord/zapret/discussions/90) | [👾 О вирусах](https://teletype.in/@censorliber/zapretvirus)
 
 Один из самых популярных GUI лаунчеров для программы Запрет.
 
@@ -29,6 +29,10 @@ img:
 
 <img width="1000" height="950" alt="image" src="https://github.com/user-attachments/assets/ffd34cf2-9d45-43bd-9511-d2d0ed72797c" />
 
+
+
+> [!IMPORTANT]  
+> Вы можете улучшить эту вики написав статью здесь — https://github.com/youtubediscord/todo
 
 > [!IMPORTANT]  
 > Есть вопросы? Задай их здесь: https://github.com/youtubediscord/zapret/issues/new или же в группе https://t.me/youtubenotwork или https://discord.gg/kkcBDG2uws
