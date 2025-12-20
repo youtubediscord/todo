@@ -1,6 +1,7 @@
 ---
 height: 2500
 ---
+[[Домашняя страница Zapret 2|На главную]]
 
 ![[Как пользоваться Zapret#Словарь терминов (глоссарий)]]
 
@@ -50,6 +51,10 @@ height: 2500
 Пройдите по ссылке: https://github.com/youtubediscord/zapret/releases/latest/download/ZapretSetup.exe
 
 Файл с качается автоматически. Установка как в способе 1.
+
+<h1 style="font-size: 40px;">Способ 5. Собрать Zapret самостоятельно</h1>
+
+Пройдите по ссылке: https://github.com/youtubediscord/zapret/blob/main/docs/build.md
 
 ----
 
