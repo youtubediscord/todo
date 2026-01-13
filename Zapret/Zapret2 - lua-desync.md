@@ -31,13 +31,56 @@ img:
 
 ## 📦 **Доступные функции из `zapret-antidpi.lua`**
 
+
+Аргументы
+
+| Категория   | Аргумент                  | Описание                                 |
+| ----------- | ------------------------- | ---------------------------------------- |
+| Direction   | dir                       | in \| out \| any                         |
+| Fooling     | ip_ttl=N                  | TTL для IPv4                             |
+|             | ip6_ttl=N                 | TTL для IPv6                             |
+|             | ip_autottl=delta,min-max  | Авто-определение TTL                     |
+|             | ip6_autottl=delta,min-max | Авто-определение TTL для IPv6            |
+|             | ip6_hopbyhop[=hex]        | Добавить hop-by-hop заголовок            |
+|             | ip6_hopbyhop2[=hex]       | Второй hop-by-hop                        |
+|             | ip6_destopt[=hex]         | Destopt заголовок                        |
+|             | ip6_destopt2[=hex]        | Второй destopt                           |
+|             | ip6_routing[=hex]         | Routing заголовок                        |
+|             | ip6_ah[=hex]              | Authentication заголовок                 |
+|             | tcp_seq=N                 | Добавить N к tcp.th_seq                  |
+|             | tcp_ack=N                 | Добавить N к tcp.th_ack                  |
+|             | tcp_ts=N                  | Добавить N к timestamp                   |
+|             | tcp_md5[=hex]             | Добавить MD5 опцию                       |
+|             | tcp_flags_set=<list>      | Установить TCP флаги                     |
+|             | tcp_flags_unset=<list>    | Снять TCP флаги                          |
+|             | tcp_ts_up                 | Переместить timestamp наверх             |
+|             | fool=<func>               | Кастомная функция fooling                |
+| Reconstruct | badsum                    | Невалидная L4 checksum                   |
+| Rawsend     | repeats                   | Сколько раз отправить пакет              |
+|             | ifout                     | Override исходящего интерфейса           |
+|             | fwmark                    | Override fwmark                          |
+| Payload     | payload                   | Список разрешённых типов payload         |
+| IP_ID       | ip_id                     | seq\|rnd\|zero\|none                     |
+|             | ip_id_conn                | Сохранять ip_id между пакетами           |
+| IPfrag      | ipfrag[=func]             | Функция фрагментации (default: ipfrag2)  |
+|             | ipfrag_disorder           | Отправить фрагменты в обратном порядке   |
+|             | ipfrag_pos_udp            | Позиция UDP фрагмента (default: 8)       |
+|             | ipfrag_pos_tcp            | Позиция TCP фрагмента (default: 32)      |
+|             | ipfrag_next               | Next protocol для второго фрагмента IPv6 |
 ### Базовые:
+
 | Функция | Описание |
 |---------|----------|
 | `drop` | Отбросить пакет |
 | `send` | Отправить пакет как есть (с возможной модификацией заголовков) |
 | `pktmod` | Модифицировать заголовки пакета (fooling) |
 
+| Функция | Std args                                                | Специфичные args |
+|---------|---------------------------------------------------------|------------------|
+| drop    | direction, payload                                      | -                |
+| send    | direction, fooling, ip_id, ipfrag, rawsend, reconstruct | -                |
+| pktmod  | direction, fooling, ip_id                               | -                |
+  
 ### HTTP модификации:
 | Функция | Описание |
 |---------|----------|
@@ -52,14 +95,27 @@ img:
 | `multidisorder` | Разбить + отправить в обратном порядке |
 | `tcpseg` | TCP сегментация |
 
+| Функция       | Std args                                                         | Специфичные args                                                                   |
+|---------------|------------------------------------------------------------------|------------------------------------------------------------------------------------|
+| multisplit    | direction, payload, fooling, ip_id, rawsend, reconstruct, ipfrag | pos=<list> (default: "2"), seqovl=N, seqovl_pattern=<blob>, blob=<blob>, nodrop    |
+| multidisorder | direction, payload, fooling, ip_id, rawsend, reconstruct, ipfrag | pos=<list> (default: "2"), seqovl=N, seqovl_pattern=<blob>, blob=<blob>, nodrop    |
+| tcpseg        | direction, payload, fooling, ip_id, rawsend, reconstruct, ipfrag | pos=<list> (обязательный, 2 позиции), seqovl=N, seqovl_pattern=<blob>, blob=<blob> |
+  
 ### Fake-атаки:
-| Функция | Описание |
-|---------|----------|
-| `fake` | Отправить fake пакет |
-| `fakedsplit` | Fake + сплит оригинала |
-| `fakeddisorder` | Fake + disorder оригинала |
+| Функция         | Описание                      |
+| --------------- | ----------------------------- |
+| `fake`          | Отправить fake пакет          |
+| `fakedsplit`    | Fake + сплит оригинала        |
+| `fakeddisorder` | Fake + disorder оригинала     |
 | `hostfakesplit` | Fake только для хоста + сплит |
 
+| Функция       | Std args                                                         | Специфичные args                                                                                                                      |
+|---------------|------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------|
+| fake          | direction, payload, fooling, ip_id, rawsend, reconstruct, ipfrag | blob=<blob> (обязательный), tls_mod=<list> (rnd,rndsni,sni=,dupsid,padencap)                                                          |
+| fakedsplit    | direction, payload, fooling, ip_id, rawsend, reconstruct         | pos=<marker> (default: "2"), nofake1, nofake2, nofake3, nofake4, pattern=<blob>, seqovl=N, seqovl_pattern=<blob>, blob=<blob>, nodrop |
+| fakeddisorder | direction, payload, fooling, ip_id, rawsend, reconstruct         | pos=<marker> (default: "2"), nofake1-4, pattern=<blob>, seqovl=N, seqovl_pattern=<blob>, blob=<blob>, nodrop                          |
+| hostfakesplit | direction, payload, fooling, ip_id, rawsend, reconstruct         | host=<str> (шаблон хоста), midhost=<marker>, nofake1, nofake2, disorder_after=<marker>, blob=<blob>, nodrop                           |
+  
 ### SYN-атаки:
 | Функция | Описание |
 |---------|----------|
@@ -244,11 +300,11 @@ winws2 ^
 
 #### **SYN-атаки**
 
-| Функция | Аналог nfqws1 | Описание | Параметры |
-|---------|---------------|----------|-----------|
-| `syndata` | `--dpi-desync=syndata` | Отправить SYN с данными | `blob=<blob>`, `tls_mod=<list>`, fooling, `rawsend`, `reconstruct`, `ipfrag` |
-| `synack` | — | Отправить SYN-ACK | fooling, `rawsend`, `reconstruct`, `ipfrag` |
-| `synack_split` | — | Сплит по SYN-ACK | `pos=<posmarker>`, `seqovl=N`, `seqovl_pattern=<blob>` |
+| Функция        | Аналог nfqws1          | Описание                | Параметры                                                                    |
+| -------------- | ---------------------- | ----------------------- | ---------------------------------------------------------------------------- |
+| `syndata`      | `--dpi-desync=syndata` | Отправить SYN с данными | `blob=<blob>`, `tls_mod=<list>`, fooling, `rawsend`, `reconstruct`, `ipfrag` |
+| `synack`       | —                      | Отправить SYN-ACK       | fooling, `rawsend`, `reconstruct`, `ipfrag`                                  |
+| `synack_split` | —                      | Сплит по SYN-ACK        | `pos=<posmarker>`, `seqovl=N`, `seqovl_pattern=<blob>`                       |
 
 ---
 
@@ -321,30 +377,30 @@ winws2 ^
 | `payload=<type_list>` | Фильтр по типу payload |
 
 ### **Fooling (обманки)**
-| Параметр | Описание |
-|----------|----------|
-| `ip_ttl=N` | Установить TTL IPv4 |
-| `ip6_ttl=N` | Установить Hop Limit IPv6 |
-| `ip_autottl=delta,min-max` | Автоматический TTL |
-| `ip6_autottl=delta,min-max` | Автоматический Hop Limit |
-| `ip6_hopbyhop[=hex]` | Добавить Hop-by-Hop заголовок |
-| `ip6_hopbyhop2[=hex]` | Второй Hop-by-Hop |
-| `ip6_destopt[=hex]` | Добавить Destination Options |
-| `ip6_destopt2[=hex]` | Второй Destination Options |
-| `ip6_routing[=hex]` | Добавить Routing заголовок |
-| `ip6_ah[=hex]` | Добавить Authentication Header |
-| `tcp_seq=N` | Добавить к TCP sequence |
-| `tcp_ack=N` | Добавить к TCP ack |
-| `tcp_ts=N` | Добавить к timestamp |
-| `tcp_md5[=hex]` | Добавить TCP MD5 опцию |
-| `tcp_flags_set=<list>` | Установить TCP флаги |
-| `tcp_flags_unset=<list>` | Снять TCP флаги |
-| `tcp_ts_up` | Переместить timestamp наверх |
-| `fool=<function>` | Пользовательская функция обманки |
+| Параметр                    | Описание                         |
+| --------------------------- | -------------------------------- |
+| `ip_ttl=N`                  | Установить TTL IPv4              |
+| `ip6_ttl=N`                 | Установить Hop Limit IPv6        |
+| `ip_autottl=delta,min-max`  | Автоматический TTL               |
+| `ip6_autottl=delta,min-max` | Автоматический Hop Limit         |
+| `ip6_hopbyhop[=hex]`        | Добавить Hop-by-Hop заголовок    |
+| `ip6_hopbyhop2[=hex]`       | Второй Hop-by-Hop                |
+| `ip6_destopt[=hex]`         | Добавить Destination Options     |
+| `ip6_destopt2[=hex]`        | Второй Destination Options       |
+| `ip6_routing[=hex]`         | Добавить Routing заголовок       |
+| `ip6_ah[=hex]`              | Добавить Authentication Header   |
+| `tcp_seq=N`                 | Добавить к TCP sequence          |
+| `tcp_ack=N`                 | Добавить к TCP ack               |
+| `tcp_ts=N`                  | Добавить к timestamp             |
+| `tcp_md5[=hex]`             | Добавить TCP MD5 опцию           |
+| `tcp_flags_set=<list>`      | Установить TCP флаги             |
+| `tcp_flags_unset=<list>`    | Снять TCP флаги                  |
+| `tcp_ts_up`                 | Переместить timestamp наверх     |
+| `fool=<function>`           | Пользовательская функция обманки |
 
 ### **Reconstruct**
-| Параметр | Описание |
-|----------|----------|
+| Параметр | Описание                        |
+| -------- | ------------------------------- |
 | `badsum` | Невалидная контрольная сумма L4 |
 
 ### **Rawsend**
