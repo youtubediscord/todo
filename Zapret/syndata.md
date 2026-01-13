@@ -132,7 +132,7 @@ Standard IPfrag
 | Применяются?           | НЕТ — код просто пропускается   |
 
 Почему так происходит:
-
+```c
 // protocol.c:856-936
 if (payload)  // ← syndata передаёт NULL сюда
 {
@@ -143,11 +143,11 @@ if (payload)  // ← syndata передаёт NULL сюда
 	  // ... и этот тоже
 }
 return bRes;  // возвращает true
-
+```
 Пример:
-
+```bash
 --lua-desync=syndata:blob=fake_default_tls:tls_mod=dupsid
-
+```
 Результат:
 1. fake_default_tls загружается ✓
 2. dupsid парсится без ошибки ✓
