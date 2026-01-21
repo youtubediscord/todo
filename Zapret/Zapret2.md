@@ -16,6 +16,14 @@ img:
 [[Zapret2 - mtproto]]
 [[Zapret2 - Roadmap обучения]]
 
+## Учебник (для новичков)
+[[Zapret2 - 01 - Сетевой стек для новичков (L2-L7)]]
+[[Zapret2 - 02 - TCP для новичков (seq/ack, окна, MSS)]]
+[[Zapret2 - 03 - Перехват пакетов и вердикты (NFQUEUE/WinDivert)]]
+[[Zapret2 - 04 - Dissect/Reconstruct и структура desync]]
+[[Zapret2 - 05 - Payload types, reasm/replay и маркеры]]
+[[Zapret2 - 06 - Lua pipeline: инстансы, args, дебаг]]
+
 [[Zapret2 - оркестратор]]
 
 ## Техники дурения (стратегии)
