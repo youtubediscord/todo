@@ -14,6 +14,7 @@ img:
 [[Zapret2 - blob]]
 [[Zapret2 - последовательность аргументов]]
 [[Zapret2 - mtproto]]
+[[Zapret2 - Roadmap обучения]]
 
 [[Zapret2 - оркестратор]]
 
