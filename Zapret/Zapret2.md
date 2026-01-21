@@ -17,6 +17,9 @@ img:
 
 [[Zapret2 - оркестратор]]
 
+## Техники дурения
+[[syndata]]
+
 
 ```bash
 start "zapret: http,https,quic" /min "%~dp0winws2.exe" ^
