@@ -19,6 +19,7 @@ img:
 
 ## Техники дурения (стратегии)
 [[syndata]]
+[[fake]]
 [[multisplit]]
 [[multidisorder]]
 
