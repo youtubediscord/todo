@@ -20,6 +20,7 @@ img:
 ## Техники дурения (стратегии)
 [[syndata]]
 [[multisplit]]
+[[multidisorder]]
 
 
 ```bash
