@@ -14,7 +14,9 @@ img:
 [[Zapret2 - blob]]
 [[Zapret2 - последовательность аргументов]]
 [[Zapret2 - mtproto]]
+[[preset]]
 [[Zapret2 - Roadmap обучения]]
+[[Zapret2 - start-cuttoff (n/d) и почему сдвигается на ClientHello]]
 
 ## Учебник (для новичков)
 [[Zapret2 - 01 - Сетевой стек для новичков (L2-L7)]]
