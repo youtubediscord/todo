@@ -142,7 +142,7 @@ img:
 --lua-desync=multidisorder_legacy:seqovl=652:seqovl_pattern=tls5
 ```
 
-Комбинация двух техник:
+Комбинация двух техник `lua-desync` (*или же фаз, их можно выбирать несколько*):
 1. **fake** с `blob=tls_google` — отправить фейк, выглядящий как запрос к google.com
 2. **multidisorder_legacy** — старая версия disorder с большим seqovl=652
 
