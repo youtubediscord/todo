@@ -2,6 +2,8 @@
 tags:
 link:
 aliases:
+  - blob
+  - блоб
 img:
 ---
 
