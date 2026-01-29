@@ -33,7 +33,6 @@ views:
 
 ## [[Zapret2]]
 
-[[Zapret VPN (Telegram bot)]]
 
 [[discord]]
 ### [[Дорожная карта]] | [[Zapret ссылки]]
