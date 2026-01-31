@@ -27,15 +27,16 @@ Zaprett GUI: https://github.com/CherretGit/zaprett-app
 
 Для перенаправления hosts (ChatGPT, Notion и т.д.): https://github.com/AdAway/AdAway
 
-🐳 ➖➖➖ Без Root прав ➖➖➖
-ByeByeDPI (быстрый старт): https://github.com/HideakiTaiki/ByeByeDPI-Manual/blob/main/README.md
-Поддержка: https://t.me/byebyedpi_group
+## ByeByeDPI (без Root)
+![[ByeByeDPI - Что это такое]]
 
-Перенаправление hosts: https://www.comss.ru/page.php?id=7315 или https://xbox-dns.ru или dns.malw.link
 
-🐳 ➖➖➖ Android TV ➖➖➖
+## Перенаправление hosts
+DNS от https://www.comss.ru/page.php?id=7315 или https://xbox-dns.ru или dns.malw.link
+
+## Android TV
 https://www.youtube.com/watch?v=q5fVssg6Wjw
 
-☄️ Всё остальное тут: https://t.me/androidawesome
+### ☄️ Всё остальное тут: https://t.me/androidawesome
 
 запрет для обхода блокировок discord и youtube, дискорда и ютуба, запретов нет, обход блокировки дискорд и ютуб
