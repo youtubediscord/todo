@@ -33,7 +33,7 @@ views:
 
 ## [[Zapret2]]
 
-
+[[android]]
 [[discord]]
 ### [[Дорожная карта]] | [[Zapret ссылки]]
 
