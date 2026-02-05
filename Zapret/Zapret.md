@@ -30,6 +30,7 @@ views:
 [[Как пользоваться Zapret]]
 [[ByeByeDPI - Что это такое]]
 [[Манифест Zapret]]
+[[ZapretVPN]]
 
 ## [[Zapret2]]
 
