@@ -37,7 +37,7 @@ Zapret выполняет действия, которые *технически
 Обратите внимание на окончание `!ml` в названии угрозы. Это означает **machine learning** — то есть не человек-аналитик пометил файл как вирус, а нейросеть Microsoft Defender решила, что поведение программы «подозрительное». Такие детекты часто бывают ложными, особенно для программ, работающих с системными компонентами.
 
 ### Что означает детект «Trojan:Win32/Sabsik.FL.A!ml»
-Аналогично Bearfoos это всего лишь ИИ обнаружение. Как написано [здесь](https://www.reddit.com/r/antivirus/comments/1bqsjws/trojanwin32sabsikflaml_badly_need_help_im/) большинство таких файлов полностью безопасны.
+Аналогично Bearfoos это всего лишь ИИ обнаружение. Как написано [здесь](https://www.reddit.com/r/antivirus/comments/1bqsjws/trojanwin32sabsikflaml_badly_need_help_im/) большинство таких файлов полностью безопасны. Например такие срабатывания были на безопасные и открытые [GitHub проекты](https://github.com/bevyengine/bevy/discussions/11624).
 
 ![[Pasted image 20260206183055.png]]
 ### Чего Zapret НЕ делает
