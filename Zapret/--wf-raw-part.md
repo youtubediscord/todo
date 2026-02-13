@@ -8,7 +8,7 @@ img:
 # Внутренние фильтры WinDivert
 В `zapret\windivert.filter\*.txt` лежат WinDivert raw-фильтры — они отбирают пакеты по L3/L4 (ip/ipv6, tcp/udp, порты, inbound/outbound) и иногда по «сигнатурам» в payload. Доменного имени в IP‑пакетах нет, поэтому напрямую “по домену” в WinDivert‑фильтре обычно не фильтруют.
 
-Домены: делаются на уровне winws/winws2 через `--hostlist` / `--hostlist-domains`.
+Домены: делаются на уровне winws/winws2 через [[Zapret2 - filter#10. **`--hostlist`** - Включающий список доменов|--hostlist]] / [[Zapret2 - filter#11. **`--hostlist-domains`** - Фиксированный список доменов|--hostlist-domains]].
 
 IP/подсети: можно фильтровать и в WinDivert‑фильтре (ip.DstAddr, ip.SrcAddr, ipv6.DstAddr, ipv6.SrcAddr), и (часто удобнее) через --ipset.
 
