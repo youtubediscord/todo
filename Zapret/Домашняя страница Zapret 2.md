@@ -54,3 +54,10 @@ img:
    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=youtubediscord/zapret&type=Date" />
    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=youtubediscord/zapret&type=Date" />
  </picture>
+
+<iframe
+  src="https://youtubediscord.github.io/todo?u=https%3A%2F%2Fpublish.obsidian.md"
+  title="Комментарии"
+  style="width:100%;min-height:560px;border:0"
+  loading="lazy">
+</iframe>
