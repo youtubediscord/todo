@@ -21,7 +21,7 @@ views:
 
 ## [[Privacy]]
 
-[[Базовые аргументы (режимы фильтрации WinDivert)]]
+[[windivert]]
 [[ZapretTeam]]
 [[Zapret flags]]
 [[Ошибка запуска - Не удалось запустить DPI]]
@@ -207,6 +207,6 @@ description: "Best Zapret. Contribute to Detoools/Zapret-Discord-YouTube develop
 url: "https://github.com/Detoools/Zapret-Discord-YouTube"
 ```
 
-[[Базовые аргументы (режимы фильтрации WinDivert)]]
+
 [[ZapretTeam]]
 
