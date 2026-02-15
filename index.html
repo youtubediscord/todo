@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Комментарии</title>
+    <style>
+      html, body { margin:0; padding:0; }
+      #disqus_thread { margin:0 auto; max-width: 100%; }
+    </style>
+  </head>
+  <body>
+    <div id="disqus_thread"></div>
+
+    <script>
+      const q = new URLSearchParams(window.location.search);
+      const pageUrl = q.get('u') || 'https://publish.obsidian.md/zapret';
+      const pageTitle = q.get('t') || 'Note';
+      const pageId = q.get('i') || pageUrl;
+
+      window.disqus_config = function () {
+        this.page.url = pageUrl;
+        this.page.identifier = pageId;
+        this.page.title = pageTitle;
+      };
+    </script>
+
+    <script>
+      (function () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://loop-uh.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+      })();
+    </script>
+    <noscript>Включите JavaScript, чтобы видеть комментарии.</noscript>
+  </body>
+</html>
