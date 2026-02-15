@@ -702,3 +702,10 @@ img:
 --payload=all
 --lua-desync=fake:blob=quic_google:ip_autottl=-2,3-20:ip6_autottl=-2,3-20:payload=all:repeats=10
 ```
+
+<iframe
+  src="https://youtubediscord.github.io/todo?u=https%3A%2F%2Fpublish.obsidian.md"
+  title="Комментарии"
+  style="width:100%;min-height:560px;border:0"
+  loading="lazy">
+</iframe>
