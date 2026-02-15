@@ -1,12 +1,23 @@
 <!doctype html>
-<html lang="ru">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Комментарии</title>
+    <meta name="color-scheme" content="light" />
+    <title>Disqus comments</title>
     <style>
-      html, body { margin:0; padding:0; }
-      #disqus_thread { margin:0 auto; max-width: 100%; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        background: #fff;
+        color: #111;
+        color-scheme: light;
+      }
+
+      #disqus_thread {
+        background: #fff;
+      }
     </style>
   </head>
   <body>
@@ -17,6 +28,7 @@
       const pageUrl = q.get('u') || 'https://publish.obsidian.md/zapret';
       const pageTitle = q.get('t') || 'Note';
       const pageId = q.get('i') || pageUrl;
+      document.documentElement.style.colorScheme = 'light';
 
       window.disqus_config = function () {
         this.page.url = pageUrl;
@@ -27,12 +39,14 @@
 
     <script>
       (function () {
-        var d = document, s = d.createElement('script');
+        var d = document;
+        var s = d.createElement('script');
         s.src = 'https://loop-uh.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
+        s.setAttribute('data-timestamp', String(Date.now()));
         (d.head || d.body).appendChild(s);
       })();
     </script>
-    <noscript>Включите JavaScript, чтобы видеть комментарии.</noscript>
+
+    <noscript>Please enable JavaScript to view the comments.</noscript>
   </body>
 </html>
