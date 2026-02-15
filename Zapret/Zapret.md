@@ -25,7 +25,7 @@ views:
 [[ZapretTeam]]
 [[Zapret flags]]
 [[Ошибка запуска - Не удалось запустить DPI]]
-[[download]]
+
 [[premium]]
 [[Как пользоваться Zapret]]
 [[ByeByeDPI - Что это такое]]
