@@ -10,7 +10,6 @@ tags:
 aliases:
   - Zapret2 учебник 03
 ---
-
 # Zapret2 для новичков — 03: перехват пакетов и вердикты (NFQUEUE/WinDivert)
 
 Цель: понять “где” стоит zapret2 и что значит `PASS/MODIFY/DROP`.
@@ -78,9 +77,3 @@ aliases:
 - добавить `--lua-desync=pass` или `--lua-desync=pktdebug`
 
 Цель: заметить, что каждый перехваченный пакет даёт лог “что пришло” → “какие Lua инстансы вызвались” → “какой verdict вернулся”.
-
-## 6) Что читать дальше
-
-- `[[Zapret2 - 04 - Dissect/Reconstruct и структура desync]]`
-- `[[Zapret2 - 05 - Payload types, reasm/replay и маркеры]]`
-
