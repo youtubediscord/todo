@@ -10,7 +10,6 @@ aliases:
   - Zapret2 start cutoff
   - Zapret2 n2 n3 clienthello
 ---
-
 # Zapret2: start/cutoff и почему `n2<n3` “вдруг” попадает на ClientHello
 
 Эта заметка — ответ на типичную ситуацию:

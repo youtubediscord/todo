@@ -9,7 +9,6 @@ tags:
 aliases:
   - Zapret2 учебник 05
 ---
-
 # Zapret2 для новичков — 05: payload types, reasm/replay и маркеры
 
 Цель: понять, как zapret2 отличает `http_req` от `tls_client_hello`, зачем нужен `reasm_data` и почему “маркеры” (host/midsld/…) иногда не работают.
