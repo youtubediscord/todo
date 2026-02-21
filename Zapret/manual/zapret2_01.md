@@ -8,7 +8,6 @@ tags:
 aliases:
   - Zapret2 учебник 01
 ---
-
 # Zapret2 для новичков — 01: сетевой стек (L2–L7) простыми словами
 
 Эта заметка нужна, чтобы дальше было легко понимать код zapret2 (nfqws2/winws2) и термины вроде “raw packet”, “payload”, “TTL”, “checksum”, “MSS”.
