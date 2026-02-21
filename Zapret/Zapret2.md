@@ -61,15 +61,16 @@ img:
 [[Zapret2 - последовательность аргументов]]
 [[Zapret2 - mtproto]]
 [[Zapret2 - Roadmap обучения]]
-[[Zapret2 - start-cuttoff (n/d) и почему сдвигается на ClientHello]]
+[[Zapret2 startcutoff и почему n2 n3 вдруг попадает на ClientHello]]
 
 ## Учебник (для новичков)
 [[Zapret2 - 01 - Сетевой стек для новичков (L2-L7)]]
-[[Zapret2 - 02 - TCP для новичков (seq/ack, окна, MSS)]]
-[[Zapret2 - 03 - Перехват пакетов и вердикты (NFQUEUE/WinDivert)]]
-[[Zapret2 - 04 - Dissect/Reconstruct и структура desync]]
-[[Zapret2 - 05 - Payload types, reasm/replay и маркеры]]
-[[Zapret2 - 06 - Lua pipeline: инстансы, args, дебаг]]
+[[Zapret2 - 02 - TCP для новичков (seq ack, окна, MSS)]]
+[[Zapret2 - 03 - Перехват пакетов и вердикты (NFQUEUE WinDivert)]]
+[[Zapret2 - 04 - Dissect Reconstruct и структура desync]]
+[[Zapret2 для новичков — 05 payload types, reasm replay и маркеры]]
+[[Zapret2 - 06 - Lua pipeline инстансы, args, дебаг]]
+[[Zapret2 startcutoff и почему n2 n3 вдруг попадает на ClientHello]]
 
 [[Zapret2 - оркестратор]]
 
