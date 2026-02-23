@@ -17,9 +17,14 @@ img:
 
 ![[Pasted image 20260131162343.png|800]]
 
-### [Zaret (Magisk модуль) от ImMALWARE](https://github.com/ImMALWARE/zapret-magisk)
+### Способ 1. [Magisk модуль с zapret ImMALWARE ](https://github.com/ImMALWARE/zapret-magisk)
+1. Скачайте модуль тут: https://github.com/ImMALWARE/zapret-magisk/releases/latest/download/zapret_module.zip
+2. Установите модуль, перезагрузитесь, как обычно. zapret будет запущен автоматически.
 
-### [Zapret (Magisk модуль) от sevcator](https://github.com/sevcator/zapret-magisk)
+### Способ 2. [zapret Pocket sevcator](https://github.com/sevcator/zapret-magisk)
+1. Скачайте модуль: https://github.com/sevcator/zapret-pocket/releases/download/21.0/zapret-pocket.zip
+2. Установите также как и в способе 1
+
 
 Zaprett: https://github.com/egor-white/zaprett
 Zaprett GUI: https://github.com/CherretGit/zaprett-app
