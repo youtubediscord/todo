@@ -7,17 +7,19 @@ img:
 ---
 ![[Pasted image 20260131162140.png|900]]
 # 🤖 Дурилки трафика (DPI) для Android
-## Zapret / [[Zapret2]]
+## [[Zapret2]]
 
 > [!WARNING] ВАЖНО!
 > Для того чтобы поставить zapret на телефон андроид требуются рут права (так как zapret работает напрямую с инструментом linux — iptables)!
 > А также установленное приложение [Magisk](https://github.com/topjohnwu/Magisk/releases). (для работы с IPTABLES)
 
-### [Zapret 2 (Magisk модуль)](https://github.com/youtubediscord/magisk-zapret2)
+### Способ 1. [Zapret 2 (Magisk модуль)](https://github.com/youtubediscord/magisk-zapret2)
 Самый передовой модуль для обхода блокировок YouTube, Discord и других сайтов на Android.
 
 ![[Pasted image 20260131162343.png|800]]
 
+---
+## Zapret 1
 ### Способ 1. [Magisk модуль с zapret ImMALWARE ](https://github.com/ImMALWARE/zapret-magisk)
 1. Скачайте модуль тут: https://github.com/ImMALWARE/zapret-magisk/releases/latest/download/zapret_module.zip
 2. Установите модуль, перезагрузитесь, как обычно. zapret будет запущен автоматически.
