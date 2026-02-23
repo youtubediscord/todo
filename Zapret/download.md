@@ -65,11 +65,11 @@ height: 2500
 
 Ниже представлены другие системы
 
-![[android]]
+![[android#🤖 Дурилки трафика (DPI) для Android]]
 
 -----
 
-![[linux]]
+![[linux#Установка Zapret на linux]]
 
 ----
 
