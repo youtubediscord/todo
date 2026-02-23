@@ -1,6 +1,6 @@
 # 🔐 Что это такое?
 
-### Как [пользоваться](https://github.com/youtubediscord/zapret/wiki) Zapret написано | Если у Вас [[zapret_not_working|не работает Zapret]].
+### Как [[guide|пользоваться]] Zapret | Если у Вас [[zapret_not_working|не работает Zapret]].
 
 VPN, Tor и обходы DPI - 3 основных метода обхода блокировок в современной России. Рассмотрим каждый подробнее. 
 
