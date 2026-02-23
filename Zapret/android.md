@@ -60,8 +60,6 @@ img:
 
 ⚠️ Сервера, используемые в качестве прокси и указанные в файле hosts нам неподконтрольны, мы не несём за них отвественность, используйте с осторожностью
 
------
-
 Zaprett: https://github.com/egor-white/zaprett
 Zaprett GUI: https://github.com/CherretGit/zaprett-app
 Специальная тема: https://4pda.to/forum/index.php?showtopic=1108704
