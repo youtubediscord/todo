@@ -67,46 +67,7 @@ height: 2500
 Для того чтобы поставить zapret на телефон андроид требуются рут права (так как zapret работает напрямую с инструментом linux — iptables)!
 А также установленное приложение [Magisk](https://github.com/topjohnwu/Magisk/releases).
 
-## Способ 1. [Magisk модуль с zapret ImMALWARE](https://github.com/ImMALWARE/zapret-magisk)
-1. Скачайте модуль тут: https://github.com/ImMALWARE/zapret-magisk/releases/latest/download/zapret_module.zip
-2. Установите модуль, перезагрузитесь, как обычно. zapret будет запущен автоматически.
-
-## Способ 2. [zapret Pocket sevcator](https://github.com/sevcator/zapret-pocket)
-1. Скачайте модуль: https://github.com/sevcator/zapret-pocket/releases/download/21.0/zapret-pocket.zip
-2. Установите также как и в способе 1
-
-
-## Способ 3. [zaprett](https://mailru.pro)
-
-Вики по установке доступна здесь: https://mailru.pro/guide/install/app-module
-Исходный код здесь: https://github.com/CherretGit/zaprett-app
-
-[📣 Официальный Telegram-канал модуля](https://t.me/zaprett_module)
-
-Представляет собой портированную версию [zapret](https://github.com/bol-van/zapret/) от [bol-van](https://github.com/bol-van/) для Android устройств.
-
-Требования:
-* Magisk 24.1+
-* Прямые руки
-* Termux или другой эмулятор терминала **И/ИЛИ**  [ремейк приложения zaprett от cherret](https://github.com/CherretGit/zaprett-app) ("оригинал" устарел и не обновляется, вместо этого мы вдвоём занимаемся версией на Kotlin!)
-
-На данный момент модуль умеет:
-+ Включать, выключать и перезапускать nfqws
-+ Работать с листами, айписетами, стратегиями
-+ Предлагать обновления через Magisk/KSU/KSU Next/APatch
-
-Какую версию модуля выбрать?
-
-В актуальных релизах есть 2 версии модуля, а именно:
-- zaprett.zip
-- zaprett-hosts.zip (с /etc/hosts)
-
-Что такое /etc/hosts?
-Говоря грубо, это файл, который влияет на работу нейросетей и других недоступных сервисов, перенаправляя ваш траффик на сторонние сервера.
-
-Если вы используете модули, которые подменяют этот файл (например, всевозможные блокировщики рекламы и разблокировщики нейросетей), выбирайте версию <big>**без hosts**</big>, иначе модули будут конфликтовать друг с другом.
-
-⚠️ Сервера, используемые в качестве прокси и указанные в файле hosts нам неподконтрольны, мы не несём за них отвественность, используйте с осторожностью
+![[android]]
 
 -----
 # Zapret (linux)
