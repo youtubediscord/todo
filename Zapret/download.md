@@ -53,9 +53,11 @@ height: 2500
 
 ## Способ 4. Через Github
 
-Пройдите по ссылке: https://github.com/youtubediscord/zapret/releases/latest/download/ZapretSetup.exe
+Пройдите по [ссылке](https://github.com/youtubediscord/zapret/releases/latest) и скачать файл установщика (*пример ниже для версии `20.4.0.4`, у Вас может быть другая версия*):
 
-Файл с качается автоматически. Установка как в способе 1.
+![[Pasted image 20260223220919.png]]
+
+Установка как в способе 1.
 
 ## Способ 5. Собрать Zapret самостоятельно
 
