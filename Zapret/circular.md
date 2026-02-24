@@ -77,6 +77,39 @@
 
 ---
 
+## Стратегия из нескольких фаз
+
+Одна стратегия может включать **несколько инстансов** с одинаковым `strategy=N`.
+`circular` проходит весь план и выполняет **все** инстансы, у которых номер совпадает — по порядку.
+
+```bash
+--lua-desync=circular:fails=1:time=300
+--lua-desync=fake:blob=fake_default_http:repeats=4:strategy=1   # фаза 1
+--lua-desync=multisplit:pos=2:seqovl=211:strategy=1             # фаза 2
+--lua-desync=multidisorder:pos=host:strategy=2:final
+```
+
+Для стратегии 1 последовательно выполнятся `fake` → `multisplit`.
+
+### Форматирование в config
+
+Параметры внутри `NFQWS2_OPT="..."` можно переносить на новые строки и делать отступы — shell разбирает их как обычные пробелы:
+
+```bash
+NFQWS2_OPT="
+--filter-tcp=443 --filter-l7=tls <HOSTLIST> --payload=tls_client_hello
+--out-range=-d1000
+--in-range=-s5556
+--lua-desync=circular:fails=1:time=300:retrans=3:nld=2
+  --lua-desync=fake:blob=fake_default_http:repeats=4:strategy=1
+  --lua-desync=multisplit:pos=2:seqovl=211:strategy=1
+  --lua-desync=multidisorder:pos=host:strategy=2:final
+--new
+"
+```
+
+---
+
 ## Пример
 
 ```
