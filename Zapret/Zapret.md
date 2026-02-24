@@ -33,6 +33,7 @@ views:
 [[ZapretVPN]]
 
 ## [[Zapret2]]
+[[circular]]
 
 [[android]]
 [[discord]]
