@@ -53,7 +53,7 @@ img:
 ## [[preset|Пресеты]]
 [[Zapret2 - основные флаги]]
 [[Zapret2 - wf]]
-[[Zapret2 - filter]]
+[[filter]]
 [[Zapret2 - out-range]]
 [[Zapret2 - payload]]
 [[Zapret2 - lua-desync]]
