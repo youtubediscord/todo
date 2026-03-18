@@ -17,6 +17,9 @@ img:
 
 Автозапуск поддерживается только вручную (через добавление в реестр или папку `Start Menu`)
 
+## Zapret 2
+Доступно здесь — https://github.com/youtubediscord/zapret2-youtube-discord
+## Zapret 1
 Скачать файл можно [тут](https://t.me/bypassblock/666) или по [ссылке](https://github.com/youtubediscord/zapret/releases/tag/win7).
 
 ![[Pasted image 20251220221441.png]]
