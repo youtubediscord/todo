@@ -7,4 +7,4 @@
 [[zapret2_06|Zapret2 для новичков — 06: Lua pipeline (инстансы, аргументы, дебаг)]]
 [[zapret2_start_cutoff|Zapret2: start/cutoff и почему n2<n3 “вдруг” попадает на ClientHello]]
 
-[[Zapret2 - оркестратор]]
+[[оркестратор]]
