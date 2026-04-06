@@ -5,7 +5,7 @@ aliases:
 img:
 ---
 
-## WinDivert фильтры (`--wf-*`) в zapret2 для Windows
+## WinDivert фильтры (`--wf-*`) в [[zapret2]] для Windows
 
 **WinDivert** — это драйвер для Windows, который позволяет перехватывать и модифицировать сетевые пакеты на уровне ядра. В zapret2 для Windows используется программа **winws2** (вместо nfqws2 для Linux), которая работает с WinDivert.
 
