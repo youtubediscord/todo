@@ -24,9 +24,13 @@
 11. [Конфигурации: блокировка geoip:ru на сервере](#11-конфигурации-блокировка-geoipru-на-сервере)
 12. [Конфигурации: маршрутизация «Всё кроме РФ» на клиенте](#12-конфигурации-маршрутизация-всё-кроме-рф-на-клиенте)
 13. [Блокировка Happ на сервере подписок](#13-блокировка-happ-на-сервере-подписок)
-14. [FAQ: hev-socks5-tunnel, Karing, Husi, v2rayN](#14-faq-hev-socks5-tunnel-karing-husi-v2rayn)
-15. [CVE-2023-43644: обход аутентификации sing-box](#15-cve-2023-43644-обход-аутентификации-sing-box)
-16. [Чеклист действий](#16-чеклист-действий)
+14. [**ГАЙД: v2rayNG — как защититься**](#14-гайд-v2rayng--как-защититься)
+15. [**ГАЙД: NekoBox — как защититься**](#15-гайд-nekobox--как-защититься)
+16. [**ГАЙД: Clash/mihomo — как защититься**](#16-гайд-clashmihomo--как-защититься)
+17. [Фаерволы на Android: что реально работает](#17-фаерволы-на-android-что-реально-работает)
+18. [FAQ: hev-socks5-tunnel, Karing, Husi, v2rayN](#18-faq-hev-socks5-tunnel-karing-husi-v2rayn)
+19. [CVE-2023-43644: обход аутентификации sing-box](#19-cve-2023-43644-обход-аутентификации-sing-box)
+20. [Чеклист действий](#20-чеклист-действий)
 
 ---
 
@@ -57,34 +61,43 @@ Xray API: Not found            ← API недоступен
 
 ### Android
 
-| Клиент | Ядро | SOCKS5 auth | UDP auth | Статус | Что делать |
-|--------|------|-------------|----------|--------|------------|
-| **v2rayNG** | xray (hev-socks5-tunnel) | ❌ Нет | ❌ | 🟡 Уязвим | Перейти на Husi/SFA или ждать фикса |
-| **Hiddify** | sing-box | ❌ Нет в UI | ❌ | 🟡 Уязвим | Перейти на Husi/SFA |
-| **Neko Box** | sing-box | ❌ Нет | ❌ | 🟡 Уязвим | Перейти на Husi/SFA |
-| **Npv Tunnel** | xray | ❌ Нет | ❌ | 🟡 Уязвим | Перейти на Husi/SFA |
-| **Happ** | xray | ❌ Нет | ❌ | 🔴 **Удалить немедленно** | HandlerService = дамп ключей |
-| **Karing** | sing-box | ⚠️ Возможно через JSON | ? | 🟡 Нужна проверка | См. [FAQ](#14-faq) |
-| **Husi** | sing-box (dun) | ✅ **Да** | ⚠️ Сессионная | 🟢 **Рекомендован** | Включить auth в настройках |
-| **SFA (sing-box)** | sing-box | ✅ Да (JSON) | ⚠️ Сессионная | 🟢 Можно настроить | Ручная правка JSON |
-| **saeeddev94/xray** | xray | ✅ Да (JSON) | ⚠️ Сессионная | 🟢 Можно настроить | F-Droid, ручной JSON |
+| Клиент | Ядро | Порт | SOCKS5 auth | Статус | Что делать |
+|--------|------|------|-------------|--------|------------|
+| **v2rayNG** 2.0.0 | xray | 10808 | ❌ Нет в UI. ⚠️ Custom config — ненадёжно (v2rayNG может перезаписать inbound) | 🟡 Уязвим | Перейти на Husi; или AFWall+ (root) |
+| **Hiddify** 4.1.1 | sing-box + xray | ? | ❌ Нет в UI | 🟡 Уязвим | Перейти на Husi/SFA |
+| **NekoBox** 1.4.2 | sing-box 1.12.19 | 2080 | ❌ Нет в UI. ⚠️ Custom JSON — возможно, но сбрасывается при обновлении | 🟡 Уязвим | Перейти на Husi; или удалить mixed inbound |
+| **Npv Tunnel** | xray | ? | ❌ Нет | 🟡 Уязвим | Перейти на Husi/SFA |
+| **v2RayTun** 5.19.64 | xray | ? | ⚠️ Ядро поддерживает, UI — неизвестно | 🟡 Скорее уязвим | Уточнить у разработчика |
+| **Happ** | xray | ? | ❌ + API HandlerService без auth | 🔴 **УДАЛИТЬ НЕМЕДЛЕННО** | Дамп ключей, IP, SNI |
+| **Karing** | sing-box | 3067 | ⚠️ Ядро поддерживает, в UI нет настройки | 🟡 Скорее уязвим | Проверить custom JSON |
+| **Exclave** | sing-box | ? | ✅ Да (через конфиг) | 🟢 Можно настроить | Настроить auth в конфиге |
+| **Husi** 1.1.0 | sing-box (dun) | ? | ✅ **Да, есть в UI** | 🟢 **Рекомендован** | Включить auth в настройках |
+| **SFA** 1.13.6 | sing-box | ? | ✅ Да (JSON) | 🟢 Можно настроить | Ручная правка JSON |
+| **saeeddev94/xray** | xray | ? | ✅ Да (JSON + UI) | 🟢 Можно настроить | F-Droid, настроить auth |
+| **ClashMeta Android** 2.11.25 | mihomo | 7891 | ✅ Да (YAML). ⚠️ НО `skip-auth-prefixes` по дефолту включает `127.0.0.1` — localhost обходит auth! | 🟡 Уязвим по дефолту | Убрать localhost из `skip-auth-prefixes` |
+| **FlClash** | mihomo | 7891 | ✅ Да (YAML). ⚠️ Тот же дефолт `skip-auth-prefixes` | 🟡 Уязвим по дефолту | Убрать localhost из `skip-auth-prefixes` |
 
-### Windows
+### Windows / Desktop
 
-| Клиент | Ядро | SOCKS5 auth | Статус | Что делать |
-|--------|------|-------------|--------|------------|
-| **v2rayN** | xray | ⚠️ Через JSON | 🟡 Нужна ручная настройка | Включить auth + firewall |
-| **Nekoray** | sing-box/xray | ❌ Нет в UI | 🟡 Уязвим | Firewall + process rules |
-| **XrayFluent** | xray | ❌ Нет | 🟡 Уязвим | Будет исправлено |
+| Клиент | Ядро | Порт | SOCKS5 auth | Статус | Что делать |
+|--------|------|------|-------------|--------|------------|
+| **v2rayN** 7.19.5 | xray/sing-box | 10808 | ✅ Да (JSON + UI) | 🟢 Можно настроить | Включить auth + Windows Firewall |
+| **Nekoray** | sing-box/xray | ? | ❌ Нет в UI | 🔴 **Заброшен (2026)** | Перейти на v2rayN / Clash Verge Rev |
+| **XrayFluent** | xray | 10808 | ❌ Нет | 🟡 Уязвим | Будет исправлено |
+| **Clash Verge Rev** | mihomo | 7890/7891 | ✅ Да (YAML). ⚠️ `skip-auth-prefixes` | 🟡 Уязвим по дефолту | Настроить auth + убрать skip |
+| **ClashX Meta** (macOS) | mihomo | 7890/7891 | ✅ Да (YAML). ⚠️ `skip-auth-prefixes` | 🟡 Уязвим по дефолту | Настроить auth + убрать skip |
 
 ### iOS
 
 | Клиент | Ядро | SOCKS5 auth | Статус | Что делать |
 |--------|------|-------------|--------|------------|
-| **Happ** | xray | ❌ + API без auth | 🔴 **Удалить** | Удалено из App Store, обновлений не будет |
-| **V2BOX** | xray | ❌ Нет | 🟡 Уязвим | Нет решения |
-| **Exclave** | xray | ❌ Нет | 🟡 Уязвим | Нет решения |
-| **Shadowrocket** | — | ⚠️ Неизвестно | ❓ Нужна проверка | — |
+| **Happ** | xray | ❌ + API без auth | 🔴 **УДАЛИТЬ** | Удалено из App Store, фикса не будет |
+| **V2BOX** 5.3.4 | xray | ❌ Нет подтверждения | 🟡 Скорее уязвим | Нет решения |
+| **Shadowrocket** | — | ✅ **Не применимо** | 🟢 **Не уязвим** | Не создаёт SOCKS5-сервер на localhost (только VPN-клиент) |
+
+> **Shadowrocket** — это VPN-клиент, который **подключается К** прокси-серверам. Он **не создаёт** локальный SOCKS5-сервер на localhost, в отличие от v2rayNG/NekoBox/Husi. Поэтому шпиону нечего сканировать — уязвимость не применима.
+
+> **Exclave** ранее указывался как iOS-клиент — это ошибка. Exclave ([github.com/dyhkwong/Exclave](https://github.com/dyhkwong/Exclave)) — это **Android**-клиент на базе sing-box, доступен на F-Droid. Поддерживает аутентификацию через конфиг.
 
 ### О hev-socks5-tunnel (используется в v2rayNG)
 
@@ -959,7 +972,410 @@ sub.example.com {
 
 ---
 
-## 14. FAQ: hev-socks5-tunnel, Karing, Husi, v2rayN
+## 14. ГАЙД: v2rayNG — как защититься
+
+> **Статус:** v2rayNG 2.0.0 (апрель 2026) — **SOCKS5-аутентификация НЕ поддерживается через UI**
+
+### Текущая ситуация
+
+v2rayNG — самый популярный xray-клиент на Android. Он создаёт локальный SOCKS5-прокси на `127.0.0.1:10808` **без аутентификации**. В UI приложения **нет настройки** для включения auth. Последняя версия (2.0.0 от 4 апреля 2026) эту проблему **не исправляет**.
+
+Разработчики уведомлены 10 марта 2026 — на 7 апреля фикса нет.
+
+### Вариант A: Custom Config (частичная защита)
+
+v2rayNG поддерживает импорт полного xray JSON-конфига. Можно попробовать включить auth через custom config:
+
+**Шаг 1.** Создайте файл `config.json` на телефоне (через любой текстовый редактор):
+
+```json
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "tag": "socks-in",
+      "port": 10808,
+      "listen": "127.0.0.1",
+      "protocol": "socks",
+      "settings": {
+        "auth": "password",
+        "accounts": [
+          {
+            "user": "myuser_r4nd0m",
+            "pass": "mypass_s3cur3_x7k9"
+          }
+        ],
+        "udp": false
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"],
+        "routeOnly": true
+      }
+    },
+    {
+      "tag": "http-in",
+      "port": 10809,
+      "listen": "127.0.0.1",
+      "protocol": "http",
+      "settings": {
+        "accounts": [
+          {
+            "user": "myuser_r4nd0m",
+            "pass": "mypass_s3cur3_x7k9"
+          }
+        ]
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "vless",
+      "tag": "proxy",
+      "settings": {
+        "vnext": [
+          {
+            "address": "ВАШ_СЕРВЕР_IP",
+            "port": 443,
+            "users": [
+              {
+                "id": "ВАШ_UUID",
+                "encryption": "none",
+                "flow": "xtls-rprx-vision"
+              }
+            ]
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "fingerprint": "chrome",
+          "serverName": "www.microsoft.com",
+          "publicKey": "ВАШ_PUBLIC_KEY",
+          "shortId": ""
+        }
+      }
+    },
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "IPIfNonMatch",
+    "rules": [
+      {
+        "type": "field",
+        "ip": ["geoip:ru"],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "ip": ["geoip:private"],
+        "outboundTag": "direct"
+      },
+      {
+        "type": "field",
+        "network": "tcp,udp",
+        "outboundTag": "proxy"
+      }
+    ]
+  }
+}
+```
+
+**Шаг 2.** В v2rayNG: нажмите **+** → **Custom config** → **Import custom config from locally** → выберите файл.
+
+**Шаг 3.** Нажмите на импортированный конфиг, чтобы активировать его. Нажмите **V** для подключения.
+
+### ⚠️ Важное ограничение Custom Config
+
+**v2rayNG может перезаписать ваши inbound-настройки своими дефолтными.** Это известная проблема:
+- GitHub Issue #275: «Which parts of custom configs are honored?» — ответ: v2rayNG частично перезаписывает inbounds
+- GitHub Issue #646: «Custom configurations don't work properly»
+- На практике v2rayNG может проигнорировать `"auth": "password"` и выставить `"noauth"`
+
+**Как проверить:** после подключения запустите [POC-приложение](https://github.com/runetfreedom/per-app-split-bypass-poc). Если показывает «VPN not found» / «IP via proxy: -» → auth работает. Если показывает IP → auth перезаписан.
+
+### Вариант B: Смена порта (слабая защита)
+
+Если custom config не работает:
+
+1. В v2rayNG: **Настройки** → прокрутите вниз → поле **Local SOCKS5 port**
+2. Замените `10808` на **нестандартный** (например, `47293`)
+3. HTTP-порт: аналогично замените `10809` на другой
+
+**Почему это слабая защита:**
+- Скан всех 65535 портов — секунды
+- Но в методичке Минцифры перечислены конкретные порты, и многие POC/шпионы проверяют только известные
+- Это **не защита**, а **усложнение** — лучше чем ничего
+
+### Вариант C: Перейти на Husi (рекомендация)
+
+Если для вас критична защита — **перейти на Husi**:
+
+1. Скачайте Husi: [codeberg.org/xchacha20-poly1305/husi](https://codeberg.org/xchacha20-poly1305/husi/releases)
+2. Экспортируйте ссылку из v2rayNG: долгое нажатие на сервер → **Поделиться** → скопируйте VLESS-ссылку
+3. В Husi: импортируйте VLESS-ссылку
+4. В настройках Husi: включите SOCKS5-аутентификацию (login/password)
+5. Проверьте POC — должен показать «VPN not found»
+
+### Вариант D: v2rayNG + AFWall+ (требует root)
+
+Если у вас root:
+
+```bash
+# Узнать UID v2rayNG
+dumpsys package com.v2ray.ang | grep userId
+# Например: userId=10150
+
+# Разрешить только v2rayNG подключаться к порту 10808
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 10808 -m owner --uid-owner 10150 -j ACCEPT
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 10808 -j DROP
+iptables -I OUTPUT -p udp -d 127.0.0.1 --dport 10808 -m owner --uid-owner 10150 -j ACCEPT
+iptables -I OUTPUT -p udp -d 127.0.0.1 --dport 10808 -j DROP
+
+# То же для HTTP-порта
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 10809 -m owner --uid-owner 10150 -j ACCEPT
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 10809 -j DROP
+```
+
+> Правила iptables сбрасываются при перезагрузке. Используйте AFWall+ для автоматического применения при старте.
+
+### Сводка по v2rayNG
+
+| Метод | Эффективность | Сложность | Root? |
+|-------|--------------|-----------|-------|
+| Custom config с auth | ⚠️ Может не работать (v2rayNG перезаписывает) | Средняя | Нет |
+| Смена порта | 🟡 Слабая (скан все равно найдёт) | Лёгкая | Нет |
+| Переход на Husi | ✅ **Подтверждённая защита** | Средняя | Нет |
+| AFWall+ iptables | ✅ Полная защита | Сложная | **Да** |
+| Отдельное устройство | ✅ Полная изоляция | — | Нет |
+
+---
+
+## 15. ГАЙД: NekoBox — как защититься
+
+> **Статус:** NekoBox 1.4.2 (февраль 2026) — **SOCKS5-аутентификация НЕ поддерживается через UI**
+> **Ядро:** sing-box 1.12.19-neko-1 (CVE-2023-43644 исправлена)
+> **Nekoray (десктоп):** прекращён, не поддерживается с 2026 года
+
+### Текущая ситуация
+
+NekoBox создаёт **mixed inbound** (SOCKS4/4a/5 + HTTP) на `127.0.0.1:2080` **без аутентификации**. В UI нет настройки SOCKS5 auth. Порт 2080 нестандартный (не в методичке Минцифры), но это не защита — скан все равно найдёт.
+
+### Вариант A: Custom sing-box JSON (лучший вариант без root)
+
+NekoBox позволяет кастомизировать sing-box конфигурацию. Нужно добавить аутентификацию в mixed inbound:
+
+**Шаг 1.** В NekoBox: **Настройки** → **Config Override** (или **Custom Config**)
+
+**Шаг 2.** Добавьте в секцию `inbounds` поле `users`:
+
+```json
+{
+  "inbounds": [
+    {
+      "type": "mixed",
+      "tag": "mixed-in",
+      "listen": "127.0.0.1",
+      "listen_port": 2080,
+      "users": [
+        {
+          "username": "neko_x8f2a1",
+          "password": "p_k3m9v7c4b6n1"
+        }
+      ],
+      "sniff": true,
+      "sniff_override_destination": false
+    }
+  ]
+}
+```
+
+**Шаг 3.** Сохраните и перезапустите NekoBox.
+
+**Шаг 4.** Проверьте [POC-приложением](https://github.com/runetfreedom/per-app-split-bypass-poc):
+- «VPN not found» = auth работает ✅
+- Показывает IP = auth не применился ❌
+
+### ⚠️ Важное ограничение
+
+NekoBox генерирует sing-box JSON автоматически из UI-настроек. При обновлении конфигурации (смена сервера, обновление подписки) **кастомные inbound могут быть перезаписаны**. Проверяйте auth после каждого изменения.
+
+### Вариант B: Удалить mixed inbound полностью
+
+Если вы используете NekoBox **только в TUN-режиме** (весь трафик через VPN), локальный SOCKS5-прокси вам не нужен. Можно попробовать отключить его:
+
+1. В custom config: удалите mixed inbound из `inbounds`
+2. Оставьте только TUN inbound:
+
+```json
+{
+  "inbounds": [
+    {
+      "type": "tun",
+      "tag": "tun-in",
+      "inet4_address": "172.19.0.1/30",
+      "auto_route": true,
+      "strict_route": true
+    }
+  ]
+}
+```
+
+**Без mixed inbound** шпиону нечего сканировать на localhost — прокси не существует.
+
+**Ограничение:** некоторые приложения (Telegram, Firefox с ручной настройкой прокси) могут требовать SOCKS5-прокси напрямую. Без mixed inbound они не смогут подключиться через VPN.
+
+### Вариант C: Смена порта
+
+1. В NekoBox: **Настройки** → **Basic Settings** → **Mixed Port**
+2. Замените `2080` на нестандартный (например, `38741`)
+3. Перезапустите
+
+Та же оговорка: слабая защита, скан найдёт. Но лучше чем дефолтный 2080.
+
+### Вариант D: Переход на Husi
+
+Husi — тоже sing-box клиент, конфиги **совместимы**:
+
+1. Скачайте Husi: [codeberg.org/xchacha20-poly1305/husi/releases](https://codeberg.org/xchacha20-poly1305/husi/releases)
+2. Экспортируйте конфигурации из NekoBox (подписки, VLESS-ссылки)
+3. Импортируйте в Husi
+4. Включите SOCKS5-аутентификацию в настройках Husi
+5. Проверьте POC
+
+**Миграция:** автоматического инструмента нет. Подписки импортируются через ссылки. Routing-правила придётся настроить заново.
+
+### Вариант E: AFWall+ iptables (требует root)
+
+```bash
+# Узнать UID NekoBox
+dumpsys package moe.nb4a | grep userId
+# Например: userId=10200
+
+# Разрешить только NekoBox на порт 2080
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 2080 -m owner --uid-owner 10200 -j ACCEPT
+iptables -I OUTPUT -p tcp -d 127.0.0.1 --dport 2080 -j DROP
+iptables -I OUTPUT -p udp -d 127.0.0.1 --dport 2080 -m owner --uid-owner 10200 -j ACCEPT
+iptables -I OUTPUT -p udp -d 127.0.0.1 --dport 2080 -j DROP
+```
+
+### Nekoray (десктоп) — прекращён
+
+Nekoray (десктопная версия) **больше не поддерживается** с 2026 года. Разработчик: «不再维护，自寻替代品» (больше не обслуживается, ищите альтернативы).
+
+Альтернативы на десктопе:
+- **v2rayN** (Windows) — пресет «Все, кроме РФ», ручная правка JSON
+- **sing-box** CLI (все платформы) — полный контроль конфигурации
+- **XrayFluent** (Windows) — будет исправлен
+
+### Сводка по NekoBox
+
+| Метод | Эффективность | Сложность | Root? |
+|-------|--------------|-----------|-------|
+| Custom JSON с users | ⚠️ Работает, но может сброситься при обновлении | Средняя | Нет |
+| Удаление mixed inbound | ✅ Нет прокси = нечего сканировать | Средняя | Нет |
+| Смена порта | 🟡 Слабая | Лёгкая | Нет |
+| Переход на Husi | ✅ **Подтверждённая защита** | Средняя | Нет |
+| AFWall+ iptables | ✅ Полная защита | Сложная | **Да** |
+
+---
+
+## 16. Фаерволы на Android: что реально работает
+
+### Без root: почти ничего
+
+| Приложение | Блокирует localhost? | Почему |
+|------------|---------------------|--------|
+| **NetGuard** (VPN-based) | ❌ **Нет** | Android VPN API не перехватывает localhost-трафик. VPN видит только трафик через сетевые интерфейсы, а loopback (127.0.0.1) — внутренний |
+| **RethinkDNS** (VPN-based) | ❌ **Нет** | Та же причина — VPN API не покрывает localhost |
+| **Blokada** (VPN-based) | ❌ **Нет** | Аналогично |
+| **AdGuard** (VPN-based) | ❌ **Нет** (localhost) | Но блокирует скрипты Meta Pixel/Яндекс.Метрики на уровне DNS/HTTP — **полезно против трекинга** |
+
+**Почему VPN-based фаерволы не помогают:**
+
+```
+┌─────────────────────────────────────────────────────┐
+│                    Android                           │
+│                                                     │
+│  Приложение A ──→ 127.0.0.1:10808 ──→ xray/sing-box│
+│       ↑                                             │
+│       │ ← Это localhost, не проходит через VPN API  │
+│       │                                             │
+│  NetGuard/RethinkDNS (VPN) перехватывают ТОЛЬКО:    │
+│       eth0, wlan0, rmnet0 (реальные интерфейсы)     │
+│       ↓                                             │
+│  Приложение B ──→ google.com ──→ [VPN перехватывает]│
+└─────────────────────────────────────────────────────┘
+```
+
+Loopback-интерфейс — **внутренний**, он не маршрутизируется через VPN-тоннель. VPN API от Google **by design** не перехватывает localhost.
+
+### С root: AFWall+ (iptables)
+
+**AFWall+** ([github.com/ukanth/afwall](https://github.com/ukanth/afwall)) использует iptables **напрямую в ядре Linux**, минуя Android VPN API. Это единственный способ заблокировать localhost-доступ на Android.
+
+**Установка:**
+1. Убедитесь что есть root (Magisk/KernelSU)
+2. Установите AFWall+ из F-Droid или GitHub
+3. Откройте → разрешите root-доступ
+4. Режим: **Whitelist** (разрешить только выбранным)
+
+**Настройка кастомных правил:**
+
+В AFWall+: **Меню** → **Set custom script** → добавьте:
+
+```bash
+# Защита SOCKS5-порта v2rayNG (10808)
+# Разрешить только UID v2rayNG (замените 10150 на реальный UID)
+iptables -I "afwall" -p tcp -d 127.0.0.1 --dport 10808 -m owner --uid-owner 10150 -j ACCEPT
+iptables -I "afwall" -p tcp -d 127.0.0.1 --dport 10808 -j REJECT
+
+# Защита HTTP-порта v2rayNG (10809)
+iptables -A "afwall" -p tcp -d 127.0.0.1 --dport 10809 -m owner --uid-owner 10150 -j ACCEPT
+iptables -A "afwall" -p tcp -d 127.0.0.1 --dport 10809 -j REJECT
+
+# Защита mixed-порта NekoBox (2080)
+# (замените 10200 на реальный UID NekoBox)
+iptables -A "afwall" -p tcp -d 127.0.0.1 --dport 2080 -m owner --uid-owner 10200 -j ACCEPT
+iptables -A "afwall" -p tcp -d 127.0.0.1 --dport 2080 -j REJECT
+```
+
+**Как узнать UID приложения:**
+```bash
+# Через adb
+adb shell dumpsys package com.v2ray.ang | grep userId
+# userId=10150
+
+adb shell dumpsys package moe.nb4a | grep userId
+# userId=10200
+```
+
+Или в AFWall+ UI: каждое приложение показывает свой UID в скобках.
+
+**Важно:** правила iptables сбрасываются при перезагрузке. AFWall+ автоматически применяет кастомный скрипт при каждом старте — поэтому используйте именно AFWall+, а не ручные iptables.
+
+### Без root: что хоть немного помогает
+
+1. **AdGuard DNS** — блокирует скрипты Meta Pixel и Яндекс.Метрики, которые могут обнаруживать VPN через localhost. Не защищает от прямого сканирования шпионским модулем, но убирает трекинг из браузера.
+
+2. **Brave Browser** — с 2022 года блокирует запросы к localhost из веб-страниц. Защищает от трекинга Meta/Яндекс через браузер, но не от нативного шпионского приложения.
+
+3. **Отдельное устройство** — физическая изоляция. Российское ПО на одном телефоне, VPN на другом. Loopback не пересекается между устройствами.
+
+---
+
+## 17. FAQ: hev-socks5-tunnel, Karing, Husi, v2rayN
 
 ### Q: v2rayNG использует hev-socks5-tunnel — в нём та же уязвимость?
 
@@ -1004,7 +1420,7 @@ sub.example.com {
 
 ---
 
-## 15. CVE-2023-43644: обход аутентификации sing-box
+## 18. CVE-2023-43644: обход аутентификации sing-box
 
 ### Критическая уязвимость
 
@@ -1039,7 +1455,7 @@ sub.example.com {
 
 ---
 
-## 16. Чеклист действий
+## 19. Чеклист действий
 
 ### Для пользователей
 
