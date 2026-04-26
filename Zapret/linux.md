@@ -61,10 +61,10 @@ sudo bash main_script.sh -nointeractive
 - При остановке скрипта все добавленные правила фаервола очищаются, а фоновые процессы `nfqws` останавливаются.
 - Если у вас настроены кастомные правила в nftables, сделайте их резервное копирование — скрипт может удалить их при запуске.
 
-## Способ 3. <a target="_blank" href="https://t.me/linux_hi/57">Линукс - привет!</a> | <a target="_blank" href="https://github.com/Snowy-Fluffy/zapret.installer">Snowy-Fluffy/zapret.installer</a>
+## Способ 3. <a target="_blank" href="https://github.com/Snowy-Fluffy/zapret.installer">Snowy-Fluffy/zapret.installer</a>
 
 Облегчает установку zapret для новичков и тех, кто не хочет разбираться в его работе.  
-Устанавливает [zapret из официального репозитория](https://github.com/bol-van/zapret), CLI панель управления и [репозиторий со стратегиями и списками доменов](https://github.com/Snowy-Fluffy/zapret.cfgs).
+Устанавливает [zapret из оффициального репозитория](https://github.com/bol-van/zapret), CLI панель управления и [репозиторий со стратегиями и списками доменов](https://github.com/Snowy-Fluffy/zapret.cfgs).
 
 🔽 Установка  
 
@@ -72,15 +72,22 @@ sudo bash main_script.sh -nointeractive
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/Snowy-Fluffy/zapret.installer/refs/heads/main/installer.sh)"
 ```
-После установки данной командой можно легко запускать меню управления запретом в терминале с помощью команды:  
+
+Вызов панели управления:  
 ```bash
 zapret
 ```
 
-Телеграм канал: https://t.me/linux_hi/
+## Способ 4. <a target="_blank" href="https://t.me/linux_hi/57">Линукс - привет!</a>
+
+Выполните:
+```
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/Snowy-Fluffy/zapret.installer/refs/heads/main/installer.sh)"
+```
+После установки запрета моей командой можно запускать меню управления запретом с помощью команды zapret в терминале
 
 
-## Способ 4. <a target="_blank" href="https://github.com/kartavkun/zapret-discord-youtube">🚀 Zapret</a>
+## Способ 5. <a target="_blank" href="https://github.com/kartavkun/zapret-discord-youtube">🚀 Zapret</a>
 
 **Автоматическая установка одним командой:**
 
