@@ -41,7 +41,7 @@ Zapret полностью бесплатная программа. И такой
 
 # <img width=30px src="https://i.imgur.com/qyVBIHK.png"> 3. Windows
 
-3.1. [Скачать](https://t.me/runetvpnyoutubediscord/16) vless клиент
+3.1. [Скачать](https://github.com/2dust/v2rayN/releases) vless клиент
 
 ![[IMG-20251106123439193.png]]
 
