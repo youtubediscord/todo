@@ -1,9 +1,15 @@
 # Telemt (Rust) — установка и настройка
 
 **Репо:** https://github.com/telemt/telemt
-**Язык:** Rust + Tokio | **Версия:** 3.3.17 | **Лицензия:** GPL-3.0
+**Язык:** Rust + Tokio | **Версия:** 3.4.15 | **Лицензия:** GPL-3.0
 
 Лучший выбор для Telegram-бота: REST API для управления пользователями, per-user лимиты, TCP Splice маскировка.
+
+> [!tip] Диагностика блокировок
+> С 3.4.x telemt логирует TLS-фингерпринт (JA4/JA3) клиентов. Как по логам поймать активный детект ТСПУ (`expected_64_got_0`) — в [[Zapret/mtproto/10-telemt-logs-dpi|10-telemt-logs-dpi]].
+
+> [!tip] Продакшн-развёртывание под нагрузкой
+> Несколько инстансов, systemd, анти-DPI закалка (`client_mss="tspu"` + UFW rate-limit per-port) и фикс iOS-залипания — в [[Zapret/mtproto/11-telemt-server-setup|11-telemt-server-setup]].
 
 ## Быстрая установка (Docker)
 

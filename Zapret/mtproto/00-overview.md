@@ -36,7 +36,7 @@ MTProto Proxy (MTProxy) — специализированный прокси-с
 ## Структура гайда
 
 - [01-protocol.md](01-protocol.md) — Протокол: 3 режима, как работает FakeTLS
-- [02-implementations.md](02-implementations.md) — 4 независимые реализации (сравнение)
+- [02-implementations.md](02-implementations.md) — 5 независимых реализаций (telemt/mtg/mtprotoproxy/mtproto_proxy/mtproto.zig)
 - [03-telemt.md](03-telemt.md) — Telemt (Rust) — лучший для бота с per-user ключами
 - [04-mtg.md](04-mtg.md) — MTG (Go) — лучший для обхода DPI (Doppelganger)
 - [05-censorship.md](05-censorship.md) — ТСПУ, 6 слоёв детекции, как обходить
@@ -44,3 +44,8 @@ MTProto Proxy (MTProxy) — специализированный прокси-с
 - [07-nginx-haproxy.md](07-nginx-haproxy.md) — SNI routing, share порта 443 с сайтом
 - [08-best-practices.md](08-best-practices.md) — Выбор домена, VPS, RealiTLScanner
 - [09-bot-integration.md](09-bot-integration.md) — Интеграция с Telegram-ботом (telemt REST API)
+- [10-telemt-logs-dpi.md](10-telemt-logs-dpi.md) — Чтение логов telemt 3.4.x: JA4-фингерпринты, `expected_64_got_0`, детект ТСПУ
+- [11-telemt-server-setup.md](11-telemt-server-setup.md) — telemt в продакшн: 3 инстанса + systemd + `client_mss="tspu"` + UFW rate-limit + iOS keepalive
+- [[mtproxy/mtproto-zig|mtproto.zig]] — Zig-реализация: обход DPI «под ключ» (TCPMSS + nfqws)
+- [[mtproxy/mtproto-zig-setup|mtproto.zig — настройка (runbook)]] — пошагово + диагностика + TCPMSS/SYN-ACK приёмы
+- [[mtproxy/ja4-sni-client-side|Кто может менять JA4/SNI]] — детекция июнь 2026; почему чистый обход (смена JA4/ротация SNI) только клиентский
