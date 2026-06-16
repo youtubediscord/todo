@@ -71,3 +71,4 @@ link: https://ebyebots.ru/blog/kak-tspu-roskomnadzora-lomaet-legitimnye-sajty-i-
 - [[DPI/tspu-disable-quic-chrome|Отключение QUIC в браузере]] — клиентский приём против таймаутов на HTTP/3.
 - [[DPI/chrome-cnsa-flag-bypass|Флаг Chrome cryptography-compliance-cnsa]] — сменить TLS-отпечаток без смены браузера.
 - [[DPI/tspu-3xui-scmininterval-trap|Ловушка обновления 3x-ui]] — для тех, кто держит свой прокси на Xray.
+- [[DPI/mincifry-nuc-certs-danger-june-2026|Почему сертификаты Минцифры (НУЦ) опасны]] — другая сторона того же кризиса июня 2026: отзыв TLS-сертификатов, тупик с госкорнем и сценарии изоляции рунета.
