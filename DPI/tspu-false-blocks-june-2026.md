@@ -162,6 +162,7 @@ link: https://ebyebots.ru/blog/kak-tspu-roskomnadzora-lomaet-legitimnye-sajty-i-
 - [[DPI/tspu-http2-tls12-fix|HTTP/2 Only + TLS 1.2 против ТСПУ]] — практический гайд для владельца сайта по одному из фиксов (условие 3): почему помогает HTTP/2 и контринтуитивный откат на TLS 1.2, настройка Caddy.
 - [[DPI/tspu-3xui-scmininterval-trap|Ловушка обновления 3x-ui (scMinPostsIntervalMs)]] — почему обновление панели Xray до 3.x.x само пробивает условие «частота» и как это починить.
 - [[DPI/tspu-disable-quic-chrome|Отключение QUIC (HTTP/3) в браузере]] — клиентский приём против таймаутов на UDP-транспорте (отдельная ось проблемы).
+- [[DPI/tspu-h2-h3-fingerprint-hypothesis|Гипотеза: ТСПУ ловит прокси по «вечному HTTP/2»]] — **неверифицированная** догадка о ещё одном поведенческом признаке (xhttp+h3 vs REALITY); эффект подтверждён, механизм — нет.
 - [[VLESS/dpi-tls-june-2026|Как DPI «замораживает» VLESS+REALITY: схема июня 2026]] — детальный разбор того же триггера из трёх условий со стороны обходных средств: uTLS, JA3/JA4, выбор фингерпринта, mux.
 - [[DPI/browser-ja4-fingerprint-block|Блокировка сайта по JA4-отпечатку браузера]] — условие 2 в деталях: почему сайт не открывается только в Chrome/Edge.
 - [[DPI/chrome-cnsa-flag-bypass|Обход блокировки флагом Chrome cryptography-compliance-cnsa]] — ещё один клиентский способ сменить TLS-отпечаток (условие 2) без смены браузера.

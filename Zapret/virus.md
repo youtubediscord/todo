@@ -286,4 +286,16 @@ schtasks /create /tn "Microsoft\Windows\WindowsUpdate\WnTemp" /tr "\"javaw\" -ja
 
 ![[Pasted image 20251220210329.png]]
 
+### 6. discord-cdn-fix / Bypass Ultimate — сеть клонов-репозиториев
+Новый по механике тип: не один заражённый `rar`, а **сеть из десятка с лишним одинаковых GitHub-репозиториев** под одноразовыми аккаунтами (`rapidcounttend`, `Originioknow`, `WestDriverComply`, `Constraintpletype`, `Grayflidivider`, `Petainamplifier`, `BudgieBushing`, `StalkerLightning` и др.). У всех один баннер «BYPASS ULTIMATE», один README, один релиз `v1.1.8`. Звёзды накручены до одного числа в пределах кластера: семейство `discord-cdn-fix` / `youtube-unban-2026` — **ровно по 66**, семейство `*-fix-2026` (Roblox, Telegram) от `StalkerLightning` — **ровно по 28**. Внутри — пять-шесть неизвестных `.exe` (`Discord zapret.exe`, `Telegram zapret.exe`, `YouTube zapret.exe`, `Быстрый запуск.exe`, `Статус подключения.exe`, плюс комбо вроде `roblox-dpi-fix-2026.exe`) и ни одного исходника, хотя в темах стоит `Python`.
+
+🚩 Красные флаги:
+- Сеть идентичных клонов под случайными аккаунтами (бан одного не убивает раздачу)
+- Накрутка звёзд ровно до одного числа в пределах кластера (66 и 28)
+- Пачка неизвестных `.exe` вместо одного `winws.exe`
+- Нет исходного кода, только скомпилированные бинарники
+- README заранее оправдывается «ложными срабатываниями антивируса»
+
+Подробный разбор: [[discord-cdn-fix-fake-repos-june-2026|Bypass Ultimate / discord-cdn-fix — сеть клонов с малварью]].
+
 

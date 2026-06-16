@@ -49,3 +49,5 @@ MTProto Proxy (MTProxy) — специализированный прокси-с
 - [[mtproxy/mtproto-zig|mtproto.zig]] — Zig-реализация: обход DPI «под ключ» (TCPMSS + nfqws)
 - [[mtproxy/mtproto-zig-setup|mtproto.zig — настройка (runbook)]] — пошагово + диагностика + TCPMSS/SYN-ACK приёмы
 - [[mtproxy/ja4-sni-client-side|Кто может менять JA4/SNI]] — детекция июнь 2026; почему чистый обход (смена JA4/ротация SNI) только клиентский
+- [[mtproxy/tdlib-obf-client-side-stealth|tdlib-obf — клиентский TDLib с маскировкой JA4]] — форк официальной библиотеки клиента, который строит свежий браузерный ClientHello (PQ-профили, лечит #30733)
+- [[mtproxy/tsrman-tg-android-faketls|tsrman/tg — Telegram для Android со сменой JA4]] — готовый GUI-клиент: форк официального приложения, меняет JA4 на Firefox-подобный + джиттер коннектов (проверен на безопасность)
