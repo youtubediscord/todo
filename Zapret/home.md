@@ -14,6 +14,7 @@ img:
 <p align="center">
   <a href="https://telegram.me/bypassblock"><img alt="Основной канал" src="https://img.shields.io/badge/Основной_канал-Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white"></a>
   <a href="https://telegram.me/vpndiscordyooutube"><img alt="VPN-канал" src="https://img.shields.io/badge/VPN_канал-Telegram-179CDE?style=for-the-badge&logo=telegram&logoColor=white"></a>
+  <a href="https://t.me/nerdpapers"><img alt="Личный канал" src="https://img.shields.io/badge/Личный_канал-nerdpapers-229ED9?style=for-the-badge&logo=telegram&logoColor=white"></a>
   <a href="https://www.youtube.com/channel/UCyEOuaB8EUwn1aU8a73_EWQ/"><img alt="YouTube" src="https://img.shields.io/badge/YouTube-канал-FF0000?style=for-the-badge&logo=youtube&logoColor=white"></a>
   <a href="https://discord.com/invite/kkcBDG2uws"><img alt="Discord" src="https://img.shields.io/badge/Discord-сообщество-5865F2?style=for-the-badge&logo=discord&logoColor=white"></a>
   <a href="https://telegram.me/zapretvpns_bot"><img alt="Поддержать донатами" src="https://img.shields.io/badge/Поддержать-донат-FF424D?style=for-the-badge&logo=telegram&logoColor=white"></a>
